@@ -1,0 +1,61 @@
+.login-container {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 200px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center align the content */
+}
+
+.login-container h2 {
+    font-size: 24px;
+    margin-top: 0;
+    color: #333;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-container input {
+    width: 65%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button {
+    width: 50%;
+    padding: 10px;
+    background-color: #FFA500; /* Orange color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #FF8C00; /* Darker orange color on hover */
+}
+/* Style for the "Register" button */
+.login-container button.register-btn {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: inherit; /* Inherit font size from parent */
+    margin-top: 10px; /* Adjust margin if needed */
+}
+
+/* Style for the "Register" button on hover */
+.login-container button.register-btn:hover {
+    color: #007bff; /* Change color on hover to a darker shade of blue */
+}

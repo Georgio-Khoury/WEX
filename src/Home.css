@@ -1,0 +1,74 @@
+/* Navbar styles */
+.navbar {
+    background-color: #007bff;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: center; /* Center the navbar items horizontally */
+  }
+  
+  .navbar-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar-item {
+    margin-right: 20px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s; /* Smooth transition for color change */
+  }
+  
+  .navbar-item:hover {
+    color: #ffc107; /* Change text color on hover */
+  }
+  
+  .navbar-item:last-child {
+    margin-right: 0;
+  }
+  
+  /* Content styles */
+  .content {
+    padding: 20px;
+  }
+  
+  .content h2 {
+    color: #333;
+  }
+  
+  .content p {
+    color: #555;
+  }
+  
+  /* Styling for each content section */
+  .buying-items {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .selling-items {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .my-account {
+    background-color: #cce5ff;
+    border: 1px solid #b8daff;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .logout {
+    background-color: #f8f9fa;
+    border: 1px solid #e2e3e5;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  
