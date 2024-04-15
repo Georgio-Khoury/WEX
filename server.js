@@ -117,6 +117,25 @@ app.post('/api/logout',async (req,res)=>{
 
 //------------------------------------------------
 // items management
+app.get('/api/edititem',async (req,res)=>{
+  const {id,info} = req.body
+  const docref = doc(firestore,'Products',id)
+  try{const updating = await updateDoc(docref,{
+    Description: info.Description,
+    price: info.price,
+    category: info.categ,
+    id: info.id,
+    image:  info.image,
+    username: info.username
+  })
+  res.send('ok')
+}catch(error){
+    console.log(error)
+    res.json({"error":error})
+  }
+  
+})
+
 app.get('/api/myitems',async (req,res)=>{
   //const username = req.session.username
   const {username} = req.body
