@@ -39,15 +39,17 @@ const storage = getStorage()
 
 //---------------------------------------------------------------
 app.get('/api/login/:email', async (req,res)=>{
-  const email = req.params.email
+  var email = req.params.email
+  email = email.toLowerCase()
   console.log(email)
   var doc = await getDocs(query(collection(firestore,"Users"),where('email','==',email)))
   var username = doc.docs[0].id
   var name = doc.docs[0].data().name
+  var pfp = doc.docs[0].data().profilepic
   console.log(username);
   req.session.username = username
   console.log(req.session.username)
-  res.json({"username":username,"name":name})
+  res.json({"username":username,"name":name,"pfp":pfp})
 })
  
  
@@ -58,7 +60,7 @@ app.post('/api/adduser',upload, async (req, res) => {
     let { name,username, email, pn } = req.body;
     console.log(username)
     pn = parseInt(pn);
-    
+    email = email.toLowerCase()
 
     //checking if the document already exists(la2an usernames are unique)
     const userDocRef = doc(collection(firestore, 'Users'), username);//points to the document with ID=username
