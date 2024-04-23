@@ -11,7 +11,9 @@ async function uploadImage(file, quantity,location) {
         const metadata = {
             contentType: file.type,
         }
+        console.log("resumable bytes uploading...")
         await uploadBytesResumable(storageRef, file.buffer, metadata);
+        console.log('image upload success')
         const downurl = await getDownloadURL(storageRef)
         return downurl
     }
@@ -41,12 +43,15 @@ async function uploadImage(file, quantity,location) {
 
 const uploadSingleImage = async (req, res,location) => {
   console.log(req.body.image)
+  
+  
     const file = {
       type: req.file.mimetype,
       buffer: req.file.buffer,
     };
   
     try {
+      console.log('started uploading image...')
       const buildImage = await uploadImage(file, 'single',location);
       return( buildImage );
     } catch (err) {

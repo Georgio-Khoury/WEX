@@ -12,7 +12,7 @@ const app = express()
 const server = http.createServer(app)
 const wss = new ws.Server({ server });
 const {initializeFireBase,inifire} = require('./firebase')
-const {collection,getDocs,deleteDoc,doc,where,query, addDoc,Timestamp, serverTimestamp,setDoc,getDoc, FieldValue, updateDoc }=require("firebase/firestore");
+const {collection,getDocs,deleteDoc,doc,where,query, addDoc,Timestamp, serverTimestamp,setDoc,getDoc, FieldValue, updateDoc, orderBy }=require("firebase/firestore");
 const firebase = initializeFireBase()
 const firestore= inifire()
 const {getStorage,ref,uploadBytes, uploadBytesResumable} = require('firebase/storage');
@@ -38,8 +38,8 @@ const storage = getStorage()
 
 
 //---------------------------------------------------------------
-app.post('/api/login', async (req,res)=>{
-  const {email} = req.body
+app.get('/api/login/:email', async (req,res)=>{
+  const email = req.params.email
   console.log(email)
   var doc = await getDocs(query(collection(firestore,"Users"),where('email','==',email)))
   var username = doc.docs[0].id
@@ -47,7 +47,7 @@ app.post('/api/login', async (req,res)=>{
   console.log(username);
   req.session.username = username
   console.log(req.session.username)
-  res.json({username:username,name:name})
+  res.json({"username":username,"name":name})
 })
  
  
@@ -62,8 +62,9 @@ app.post('/api/adduser',upload, async (req, res) => {
 
     //checking if the document already exists(la2an usernames are unique)
     const userDocRef = doc(collection(firestore, 'Users'), username);//points to the document with ID=username
+    console.log('here')
     const docSnapshot = await getDoc(userDocRef);//fetches the doc with the username 
-
+    console.log('got doc')
     if (docSnapshot.exists()) {
       //if it exists return the below error msg(to be displayed under the Register form)
       
@@ -77,19 +78,21 @@ app.post('/api/adduser',upload, async (req, res) => {
     }   
 
     //else let's create it
+    console.log('sort hon')
     const joinDate = serverTimestamp();
   
-    let profilepic
+    let profilepic=''
     let location = "pfp"
     try{
     profilepic = await uploadSingleImage(req,res,location);
+    console.log('ayooo')
     }catch(error){
       res.json({error:"error uploading image"})
     }
     await setDoc(userDocRef, {
       name,
       username,
-      email,
+      email, 
       pn,
       joinDate,
       profilepic,
@@ -101,7 +104,7 @@ app.post('/api/adduser',upload, async (req, res) => {
     res.json({ id: username });
   } catch (error) {
     console.error('Error adding user to Firestore:', error);
-    res.status(500).json({ error: 'Something went wrong' });
+    res.json({ error: 'Something went wrong' });
   }
 });
 
@@ -247,19 +250,37 @@ app.delete('/api/deletecart',async (req,res)=>{
 
 
 app.get('/api/getchats', async (req, res) => {
+  const username = req.query.username
   try {
     // Fetch chats from Firestore
-    const chatsSnapshot = await getDocs(collection(firestore, 'Chats'));
+    const chatsSnapshot = await getDocs(query(collection(firestore, 'Chats'),where("Participants","array-contains",username)));
     const chats = chatsSnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
-    }));
+    })); 
     res.json(chats);
   } catch (error) {
     console.error('Error fetching chats:', error);
     res.status(500).json({ error: 'Failed to fetch chats' });
   }
-});
+});    
+
+app.post('/api/getid',async (req,res)=>{ 
+  const {username,reciever} = req.body
+ console.log(username) 
+ console.log(reciever) 
+ const id = createID(username,reciever)
+ var docid
+  try{
+   docid = await getDoc(doc(firestore,"Chats",id))
+  if(docid.exists())
+  return res.json({"id":docid.id})
+else return res.json(false)
+  }catch(error){
+    console.log(error)
+    res.json({'error':error})
+  }
+})
 
 app.post('/api/newchat', async (req,res)=>{
   
@@ -284,14 +305,17 @@ app.post('/api/newchat', async (req,res)=>{
 
 app.get('/api/getmessages', async (req, res) => {
   const chatId  = req.query.chatid;
-
+  console.log(chatId)
   try {
     // Query messages from Firestore
-    const messagesSnapshot = await getDocs(collection(firestore, `Chats/${chatId}/Messages`));
+    const messagesSnapshot = await getDocs(query(collection(firestore, `Chats/${chatId}/Messages`),orderBy('timestamp')));
+    
     const messages = messagesSnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
     }));
+    console.log('ok')
+    
     res.json(messages);
   } catch (error) {
     console.error('Error fetching messages:', error);
@@ -320,6 +344,7 @@ wss.on('connection',(ws,req)=>{
   console.log("connected to msgs")
   const chatId = req.url.split('=')[1];
   ws.chatId = chatId;
+  console.log("the chat id is: ", chatId )
   ws.on('message',async (message)=>{
     console.log('recieved msgs', message)
     try {
@@ -327,20 +352,21 @@ wss.on('connection',(ws,req)=>{
       console.log(parsedMessage)
       if (parsedMessage.type === 'message') {
         // Handle message
-        const { type,chatId, sender, content } = parsedMessage;
+        const { type,chatID, sender, content } = parsedMessage;
         var timestamp = new Date();
         var time = timestamp.toString() 
-        await setDoc(doc(firestore,"Chats",chatId,'Messages',time),{
+        try{
+        await setDoc(doc(firestore,"Chats",chatID,'Messages',time),{
           sender,
           content,
           timestamp
         })
-        
-        
+      }catch(e){console.log("i hate this ",e)}
+        console.log(wss.clients[0])
         wss.clients.forEach((client) => {
-          console.log(  ws.chatId )
+          console.log( wss.clients.size)
           if (client !== ws && client.readyState === ws.OPEN&&ws.chatId===chatId) {
-            console.log('im in')
+            
             client.send(JSON.stringify(parsedMessage));
           }
         });
@@ -353,7 +379,7 @@ wss.on('connection',(ws,req)=>{
   ws.on('close', () => {
     console.log('Client disconnected');
   });
-});
+}); 
 
 
 app.listen(port, () => {
