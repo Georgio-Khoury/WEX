@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Register.css";
 import { useNavigate } from 'react-router-dom';
-import { app } from '../firebaseConfig';
+import { app } from '../../../firebaseConfig';
 import {getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 function Register() {
 
@@ -54,16 +54,13 @@ function Register() {
         try{
         const response = await fetch('/api/adduser',{
             method: 'POST',
-            // headers: {
-            //     'Content-Type': 'application/json',
-            //     'Access-Control-Allow-Origin': '*',
-            //   },
-            body: formdata,
+            
+            body: formdata
         })
         const data = await response.json()
         
         if(!response.ok){
-            console.log('lesh not ok')
+           
             seterrormsg(data.error)
             return;
         }
@@ -71,14 +68,14 @@ function Register() {
         console.log(error)
         return;
     }
-    console.log('here')
+    console.log('meshe l7al')
     const auth =  getAuth()
     try{
     const reg = await createUserWithEmailAndPassword(auth,info.email,info.password)
     
         navigate('/')
     }catch(error){
-        console.log('la2ataa')
+        
         seterrormsg(error)
         return;
     }

@@ -2,7 +2,7 @@ import  { useState } from 'react'
 import "./Login.css"
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { app } from '../firebaseConfig';
+import { app } from '../../../firebaseConfig';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
@@ -24,19 +24,12 @@ function Login() {
 
     async function informbackend(){
         const email= info.email
-        const response = await fetch('/api/login',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-              },
-            body: JSON.stringify({email}),
-          });
+         const response = await fetch(`/api/login/${email}`)
           const data =  await response.json()
           console.log(data)
-          localStorage.setItem('username',data.username)
-          localStorage.setItem('name',data.name)
-          console.log("saved to cache: ",localStorage.getItem('username'),localStorage.getItem('name'))
+          sessionStorage.setItem('username',data.username)
+          sessionStorage.setItem('name',data.name)
+          console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'))
           
         }
     

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Chat from './Chat';
+
 import './Appi.css'
 import SellProduct from './SellProduct';
 
@@ -98,8 +98,8 @@ async function getdataz() {
 
   return (
     <>
-      {/* hello ayooo
-      <button onClick={lol}>Get Data</button>
+      
+      <button onClick={getdataz}>Get Data</button>
       {res && (<p style={{color:'red'}}>{res}</p>)}
 
       <div>
@@ -107,10 +107,10 @@ async function getdataz() {
       <button onClick={handleUpload}>Upload Image</button>
     </div>
     <div>
-      <img src="https://firebasestorage.googleapis.com/v0/b/projectfirebase-462ec.appspot.com/o/products%2F1711494228523?alt=media&token=1d4c5f5e-c1f3-4671-b1f0-d0f9065ebaa6" alt="Product" />
+      {/* <img src="https://firebasestorage.googleapis.com/v0/b/projectfirebase-462ec.appspot.com/o/products%2F1711494228523?alt=media&token=1d4c5f5e-c1f3-4671-b1f0-d0f9065ebaa6" alt="Product" /> */}
     </div>
-    <SellProduct/> */}
-    <Chat/>
+    {/* <SellProduct/> */}
+    
 
     </>
   )

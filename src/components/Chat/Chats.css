@@ -1,0 +1,10 @@
+.message-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .message {
+    word-wrap: break-word;
+    margin-bottom: 5px; 
+    color:red; /* Optional: Add margin between messages */
+  }

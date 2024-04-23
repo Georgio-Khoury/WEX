@@ -1,0 +1,28 @@
+.message-box {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 50%;
+    margin-left: auto; /* Center the message box horizontally */
+  margin-right: auto;
+  }
+  
+  .message-sender {
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .message-content {
+    margin: 10px 0;
+  }
+  
+  .message-timestamp {
+    color: #666;
+    margin: 0;
+  }
+  .message-container {
+    max-height: 400px; /* Set a maximum height for the message container */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
