@@ -1,0 +1,10 @@
+.chatbox {
+    width: 300px; /* Set the width of the chatbox */
+    padding: 20px; /* Add padding for spacing */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    background-color: #f9f9f9; /* Add background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    /* Add more styles as needed */
+  }
+  

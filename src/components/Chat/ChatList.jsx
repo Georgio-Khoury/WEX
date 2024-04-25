@@ -3,8 +3,9 @@ import Chatbox from './Chatbox'
 
 function ChatList() {
     var [chats,setchats] = useState([])
+    const [username,setusername] = useState(sessionStorage.getItem("username"))
     useEffect( () => {
-        const username='Dan'
+        
         const getchats= async ()=>{
             
             const response = await fetch(`/api/getchats?username=${username}`)
@@ -19,15 +20,16 @@ function ChatList() {
         }
         getchats();
     },[])
-
+    
   return (
     <>
     
     {chats.map(chat=>{
-      
-        return <Chatbox key={chat.id} participants={chat.participants} id={chat.id} />
+              
+       return <Chatbox key={chat.id} participants={chat.participants} id={chat.id} sender={username}/>
+       
     })}
-    <div>huh</div>
+ 
     </>
   )
 }

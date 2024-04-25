@@ -3,7 +3,7 @@ import Appi from './Appi';
 import Home from './Home';
 import Login from './components/Authentication/Login';
 import Register from './components/Authentication/Register';
-import Chat from './components/Chat/Chat'
+
 import ChatList from './components/Chat/ChatList';
 import ForgotPassword from './components/Authentication/ForgotPassword';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

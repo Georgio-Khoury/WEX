@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+
 import './Message.css'; // Import CSS file for styling
 
 function Message({ content, sender,timestamp}) {

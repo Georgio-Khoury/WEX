@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect,useRef } from 'react';
+import  { useState, useEffect,useRef } from 'react';
 import './Chats.css'
-import Message from './Message'
+import Message from './Message' 
 function Chats({ id, client, username }) {
+  
+ 
   console.log(username)
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -74,10 +76,11 @@ function Chats({ id, client, username }) {
     if (message.trim() !== '') {
       const chatID = id;
       var time = new Date();
-       
+      // var timestamp = time.toString()
        var timestamp =  time.toLocaleString([], { hour: '2-digit', minute: '2-digit' })
         console.log('timestamp: ',timestamp) 
       const sender = username;
+      console.log("sendr is :",sender)
       const newMessage = {
         type: 'message',
         chatID,

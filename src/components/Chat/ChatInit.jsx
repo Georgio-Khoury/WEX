@@ -1,25 +1,31 @@
 import { useEffect, useState } from 'react';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
-import Chat from './Chat';
+
 import Chats from './Chats';
 
 function ChatInit() {
   const [id, setId] = useState('');
   const [client, setClient] = useState(null); // State to hold WebSocket client
-
-  const username = "dan";
-  const reciever = "kevin";
+  const[user,setusername] = useState('')
+  const [rec,setreciever] = useState('')
+  
 
   useEffect(() => {
     // Function to fetch ID and create WebSocket client
     async function fetchDataAndCreateClient() {
       try {
+        const username = sessionStorage.getItem("username")
+        const reciever = sessionStorage.getItem("receiver")
+        setusername(sessionStorage.getItem("username"))
+        setreciever(sessionStorage.getItem("receiver"))
+        console.log("res",reciever)
+        console.log("sender",username)
         console.log("Fetching ID...");
         const response = await fetch('/api/getid', {
-          method: 'POST',
+          method: 'POST', 
           headers: {
             'Content-Type': 'application/json'
-          },
+          }, 
           body: JSON.stringify({ username, reciever })
         });
         const data = await response.json();
@@ -55,7 +61,7 @@ function ChatInit() {
   return (
     <div>
       {/* Render the Chat component with the ID and WebSocket client */}
-      <Chats id={id} client={client} username={username} reciever={reciever} />
+      <Chats id={id} client={client} username={user} reciever={rec} />
     </div>
   );
 }
