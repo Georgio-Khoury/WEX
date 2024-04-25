@@ -222,10 +222,32 @@ res.send("ok")
 
 //-------------------------------------------------------------------------
 //cart management
+app.get('/api/getcart',async (req,res)=>{
+  const username = req.query.username
+  console.log("username is: ",username)
+  try{
+    const docref = collection(firestore,"Users",username,"Cart")
+    const cartitems = await getDocs(docref)
+    //map throught the docs and extract the item ids
+    const ids = cartitems.docs.map(doc=>{
+      console.log(doc.id)
+      return doc.id
+    })
+    console.log(ids)
+    //then query every item by its id and return it
+    res.send("Ok")
+  }catch(error){
+    console.log(error)
+    res.json({"error":error})
+  }
+
+})
+
 
 app.post('/api/addcart',async (req,res)=>{
   //let username = req.session.username
   const {username,id} = req.body
+  //the id is the item's id
   try{
     await setDoc(doc(firestore,"Users",username,"Cart",id),{
       item:id,
@@ -238,6 +260,7 @@ app.post('/api/addcart',async (req,res)=>{
 })
 app.delete('/api/deletecart',async (req,res)=>{
   const {username,id} = req.body
+  //id is the item's id
   try{
     await deleteDoc(doc(firestore,"Users",username,"Cart",id))
   }catch(error){
@@ -284,11 +307,17 @@ else return res.json(false)
   }
 })
 
-app.post('/api/newchat', async (req,res)=>{
+
+
+app.post('/api/startchat', async (req,res)=>{
   
   const {p1,p2} = req.body
   const ID = createID(p1,p2)
   try{
+
+    //first check if the id exists
+    let chatExists = await getDoc(doc(firestore,"Chats",ID))
+    if(chatExists.empty){
  await setDoc(doc(firestore,"Chats",ID),{
   "participants":[p1,p2]
  })
@@ -299,11 +328,33 @@ app.post('/api/newchat', async (req,res)=>{
   
 })
  res.send("OK")
+}else{
+  try {
+    // Query messages from Firestore
+    const messagesSnapshot = await getDocs(query(collection(firestore, `Chats/${ID}/Messages`),orderBy('timestamp')));
+    
+    const messages = messagesSnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    console.log('ok')
+    
+    res.json(messages);
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    res.status(500).json({ error: 'Failed to fetch messages' });
+  }
+}
 }catch(error){
   console.error("Error creating new chat!, ",error)
   res.status(500).json({error: 'Failed to create new Chat'})
 }
+  
 })
+
+
+
+
 
 app.get('/api/getmessages', async (req, res) => {
   const chatId  = req.query.chatid;
@@ -325,21 +376,7 @@ app.get('/api/getmessages', async (req, res) => {
   }
 });
 
-// app.post('/api/uploadsingle', upload, async (req, res) => {
-//   const file = {
-//       type: req.file.mimetype,
-//       buffer: req.file.buffer
-//   }
-//   try {
-//       const buildImage = await uploadImage(file, 'single'); 
-//       res.send({
-//           status: "SUCCESS",
-//           imageName: buildImage
-//       })
-//   } catch(err) {
-//       console.log(err);
-//   }
-// })
+
 
 //web sockets
 wss.on('connection',(ws,req)=>{
