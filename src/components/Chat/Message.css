@@ -21,8 +21,10 @@
   .message-timestamp {
     color: #666;
     margin: 0;
+    font-size: 12px;
   }
   .message-container {
     max-height: 400px; /* Set a maximum height for the message container */
     overflow-y: auto; /* Enable vertical scrolling */
   }
+ 

@@ -3,9 +3,11 @@ import React, { useState, useEffect,useRef } from 'react';
 import './Chats.css'
 import Message from './Message'
 function Chats({ id, client, username }) {
+  console.log(username)
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const isFirstRun = useRef(true);
+  const messageContainerRef = useRef(null);
   useEffect(() => {
     async function getMessages() {
       try {
@@ -49,6 +51,7 @@ function Chats({ id, client, username }) {
 
     client.onmessage = (message) => {
       const parsedMessage = JSON.parse(message.data);
+      console.log(parsedMessage)
       if (parsedMessage.type === 'message') {
         setMessages((prevMessages) => [...prevMessages, parsedMessage]);
       }
@@ -66,12 +69,13 @@ function Chats({ id, client, username }) {
     setMessage(e.target.value);
   };
 
-  const sendMessage = () => {
+  const sendMessage =  () => {
     if (client.readyState === WebSocket.OPEN) {
     if (message.trim() !== '') {
       const chatID = id;
       var time = new Date();
-        var timestamp = time.toString()
+       
+       var timestamp =  time.toLocaleString([], { hour: '2-digit', minute: '2-digit' })
         console.log('timestamp: ',timestamp) 
       const sender = username;
       const newMessage = {
@@ -82,29 +86,40 @@ function Chats({ id, client, username }) {
         timestamp
       };
       client.send(JSON.stringify(newMessage));
-      setMessages((prevMessages) => [...prevMessages, { type: 'message', content: `You: ${message}` }]);
+      //setMessages((prevMessages) => [...prevMessages, { type: 'message', content: `You: ${message}` }]);
       setMessage('');
     }
   } else {
     console.warn('WebSocket connection is not open.');
   }
   };
-
+  useEffect(() => {
+    // Scroll to the bottom of the message container when messages change
+    if (messageContainerRef.current) {
+      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
   return (
-    <div className="App">
-      <div className="message-container">
+    <>
+      <div ref={messageContainerRef} className="message-container">
         {messages.map((msg, index) => (
-          <Message key={index} content={msg.content} sender={msg.sender}   className="message">{msg.sender === id ? `You: ${msg.content}` : msg.content}></Message>
+        
+          <Message key={index} content={msg.content} timestamp={msg.timestamp} sender={msg.sender === username ? "You" : msg.sender}   className="message"></Message>
         ))}
+
+
+
       </div>
+      <div className="input-container">
       <input
-        type="text"
-        placeholder="Type your message..."
-        value={message}
-        onChange={handleMessageChange}
+    type="text"
+    placeholder="Type your message..."
+    value={message}
+    onChange={handleMessageChange}
       />
-      <button onClick={sendMessage}>Send</button>
-    </div>
+    <button className="sendbutton" onClick={sendMessage}>Send</button>
+      </div>
+      </>
   );
 }
 

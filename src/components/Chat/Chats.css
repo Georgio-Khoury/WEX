@@ -1,10 +1,45 @@
+
+
 .message-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .message {
-    word-wrap: break-word;
-    margin-bottom: 5px; 
-    color:red; /* Optional: Add margin between messages */
-  }
+  width: 80%;
+  height: 50%; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+  scrollbar-width:auto; /* Set the width of the scrollbar */
+  scrollbar-color: #888 #f1f1f1; 
+}
+
+.message {
+  word-wrap: break-word;
+  margin-bottom: 5px;
+  color: red; /* Optional: Add margin between messages */
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column; /* Arrange children vertically */
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.input-container input {
+  /* Add your input field styles here */
+  padding: 10px;
+  /* Add more styles as needed */
+}
+
+.input-container .sendbutton {
+  /* Add your button styles here */
+  padding: 10px 20px;
+  /* Add more styles as needed */
+}
+
+
+.message-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar handle */
+}
+
+/* Track */
+.message-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}

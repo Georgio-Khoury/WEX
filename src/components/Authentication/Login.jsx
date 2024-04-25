@@ -29,6 +29,8 @@ function Login() {
           console.log(data)
           sessionStorage.setItem('username',data.username)
           sessionStorage.setItem('name',data.name)
+          sessionStorage.setItem("pfp", data.pfp)
+
           console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'))
           
         }
@@ -41,7 +43,7 @@ function Login() {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, info.email, info.password);
             seterrormsg('')
-            informbackend()
+            await informbackend()
             navigate('/home');
             console.log(userCredential)
         } catch (error) {
@@ -64,6 +66,9 @@ function Login() {
             </form>
             <button className="register-btn" onClick={()=>navigate('/register')}>Don't have an account? Register here.</button>
         {errormsg && <p style={{ color:'red'}}>{errormsg}</p>}
+        <Link to="/forgotpassword" className="forgotPass">
+                Forgot Password
+            </Link>
         </div>
     )
 }

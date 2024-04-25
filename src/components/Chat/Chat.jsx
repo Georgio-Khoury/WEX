@@ -73,7 +73,8 @@ console.log("username is ",username)
      
       const parsedMessage = JSON.parse(message.data);
       console.log(parsedMessage)
-      if (parsedMessage.type === 'message') {
+      if (parsedMessage.type === 'message'&&parsedMessage.sender!=username) {
+        console.log(parsedMessage)
         setMessages(prevMessages => [...prevMessages, parsedMessage]);
       }
     };

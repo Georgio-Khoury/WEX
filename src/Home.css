@@ -71,4 +71,17 @@
     padding: 20px;
   }
   
+  .profile-circle {
+    width: 100px;  /* or any size you want */
+    height: 100px; /* should be the same as width for a perfect circle */
+    border-radius: 50%; /* this creates the round shape */
+    overflow: hidden; /* ensures the image doesn’t exceed the circular boundary */
+    display: flex;    /* centers the image horizontally */
+    justify-content: center; /* align horizontally */
+    align-items: center; /* align vertically */
+  }
   
+  .profile-circle img {
+    width: 100%;  /* makes the image fill the container */
+    height: auto; /* keeps the image aspect ratio */
+  }

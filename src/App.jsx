@@ -5,6 +5,7 @@ import Login from './components/Authentication/Login';
 import Register from './components/Authentication/Register';
 import Chat from './components/Chat/Chat'
 import ChatList from './components/Chat/ChatList';
+import ForgotPassword from './components/Authentication/ForgotPassword';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChatInit from './components/Chat/ChatInit';
 //import Test from './Test';
@@ -20,6 +21,7 @@ function App() {
           <Route path="/chat" element={<ChatInit/>}/>
           <Route path="/test" element={<Appi/>}/>
           <Route path="/chats" element ={<ChatList/>}/>
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
                       {/* <Route path="/test" element={<Test />} /> */}
         </Routes>
       </BrowserRouter>

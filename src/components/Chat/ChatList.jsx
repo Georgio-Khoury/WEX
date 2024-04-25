@@ -1,26 +1,34 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect,useState, useRef } from 'react'
+import Chatbox from './Chatbox'
 
 function ChatList() {
-    var chats = useRef("")
+    var [chats,setchats] = useState([])
     useEffect( () => {
         const username='Dan'
         const getchats= async ()=>{
-            console.log('on')
+            
             const response = await fetch(`/api/getchats?username=${username}`)
             const data = await response.json();
             if(response.ok){
-             chats.current=   data.map(chat=>({
+             var ch=   data.map(chat=>({
                     id : chat.id,
                     participants : chat.Participants
                 }))
-                console.log(chats)
+                setchats(ch)   
             }
         }
         getchats();
     },[])
 
   return (
-    <div>{chats.current[0].participants[0]}</div>
+    <>
+    
+    {chats.map(chat=>{
+      
+        return <Chatbox key={chat.id} participants={chat.participants} id={chat.id} />
+    })}
+    <div>huh</div>
+    </>
   )
 }
 

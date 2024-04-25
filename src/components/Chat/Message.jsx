@@ -2,8 +2,8 @@
 import React from 'react';
 import './Message.css'; // Import CSS file for styling
 
-function Message({ content, sender}) {
-  // Format timestamp as desired, for example:
+function Message({ content, sender,timestamp}) {
+  timestamp = timestamp.toLocaleString([], { hour: '2-digit', minute: '2-digit' })
   
   
 
@@ -11,7 +11,7 @@ function Message({ content, sender}) {
     <div className="message-box">
       <p className="message-sender">{sender}</p>
       <div className="message-content">{content}</div>
-      {/* <p className="message-timestamp">{timestamp}</p> */}
+      <p className="message-timestamp">{timestamp}</p>
     </div>
   );
 }

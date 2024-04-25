@@ -18,7 +18,9 @@ function Home() {
             {selectedItem === 'selling' && <SellingItems />}
             {selectedItem === 'account' && <MyAccount />}
             {selectedItem === 'logout' && <Logout />}
-          
+            <div className="profile-circle">
+                <img src={sessionStorage.getItem("pfp")} alt="Pma zabett" />
+            </div>
         </div>
     )
 }
