@@ -46,10 +46,12 @@ app.get('/api/login/:email', async (req,res)=>{
   var username = doc.docs[0].id
   var name = doc.docs[0].data().name
   var pfp = doc.docs[0].data().profilepic
+  var email = doc.docs[0].data().email
+  var pn = doc.docs[0].data().pn
   console.log(username);
   req.session.username = username
   console.log(req.session.username)
-  res.json({"username":username,"name":name,"pfp":pfp})
+  res.json({"username":username,"name":name,"pfp":pfp,"pn":pn,"email":email})
 })
  
  
