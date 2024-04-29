@@ -177,16 +177,20 @@ app.get('/api/getitems',async (req,res)=>{
 app.post('/api/additem',upload,async (req,res)=>{
   let img
   try{
-  let {description,category,price} = req.body
-  const username = "tolo"//req.session.username
+  let {username,Title,description,category,price} = req.body
+    
   try{
-  img = await uploadSingleImage(req,res,products)
-  console.log(img)
+  
+  img = await uploadSingleImage(req,res,'products')
+  
+  console.log(img," img")
   }catch{
-    res.send('error getting img')
-  }
+    res.json({"error":'error getting img'})
+  } 
   try{
+    console.log(img)
   const docRef = await addDoc(collection(firestore, "Products"), {
+    Title: Title,
     Description: description,
     category: category,
     image: img,
@@ -198,13 +202,13 @@ app.post('/api/additem',upload,async (req,res)=>{
   await updateDoc(doc(firestore,"Products",docRef.id),{
     id:docRef.id
   })
-  res.send(docRef.id)
+  res.json({"id":docRef.id})
 }catch(error){
   console.log(error)
-  res.send("error posting doc to db")
+  res.json({"error":"error posting doc to db"})
 }
   }catch{
-    res.send("error getting req body")
+    res.json({"error":"error getting req body"})
   }
   
 })
@@ -220,7 +224,7 @@ await deleteDoc(doc(firestore,Product,id))
 }
 res.send("ok")
 })
-
+ 
 
 //-------------------------------------------------------------------------
 //cart management
@@ -300,7 +304,7 @@ app.post('/api/getid',async (req,res)=>{
  var docid
   try{
    docid = await getDoc(doc(firestore,"Chats",id))
-  if(docid.exists())
+  if(docid.exists()) 
   return res.json({"id":docid.id})
 else return res.json(false)
   }catch(error){

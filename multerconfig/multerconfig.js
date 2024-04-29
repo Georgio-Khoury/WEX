@@ -2,7 +2,7 @@ const multer = require('multer')
 const path = require("path")
 const upload = multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 1000000 },
+    limits: { fileSize: 10000000 },
     fileFilter: async function (req, file, cb) {
         checkFileType(file, cb);
         }
@@ -21,6 +21,7 @@ const upload = multer({
     const mimeType = fileTypes.test(file.mimetype);
   
     if (mimeType && extName) {
+      
       return cb(null, true);
     } else {
       cb("Error: Images Only !!!");

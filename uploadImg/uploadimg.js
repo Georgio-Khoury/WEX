@@ -2,7 +2,7 @@ const {getStorage,ref,uploadBytes, uploadBytesResumable,getDownloadURL} = requir
 
 async function uploadImage(file, quantity,location) {
     const storageFB = getStorage();
-
+    console.log('ana hon')
     
     if (quantity === 'single') {
         const dateTime = Date.now();
@@ -42,8 +42,6 @@ async function uploadImage(file, quantity,location) {
 
 
 const uploadSingleImage = async (req, res,location) => {
-  console.log(req.body.image)
-  
   
     const file = {
       type: req.file.mimetype,
@@ -53,6 +51,7 @@ const uploadSingleImage = async (req, res,location) => {
     try {
       console.log('started uploading image...')
       const buildImage = await uploadImage(file, 'single',location);
+      console.log(buildImage," build image")
       return( buildImage );
     } catch (err) {
       console.log(err);
