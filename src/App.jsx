@@ -1,27 +1,24 @@
 import './App.css';
-import Appi from './Appi';
-import Home from './components/NavBar/Home';
+
 import Login from './components/Authentication/Login';
 import Register from './components/Authentication/Register';
-import { useEffect, useState,useLayoutEffect } from 'react';
+
 import ChatList from './components/Chat/ChatList';
 import ForgotPassword from './components/Authentication/ForgotPassword';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChatInit from './components/Chat/ChatInit';
 
 import MyAccount from './components/MyAccount/MyAccount';
-import Sidebar from './components/NavBar/Sidebar';
+
 import SellProduct from './components/Product/SellProduct';
 import Product from './components/Product/Product';
 import MyProducts from './components/Product/MyProducts';
-import Logout from './components/Authentication/Logout';
+
 import ProductInfo from './components/Product/ProductInfo';
 
 
 function App() {
-  const sidebarRoutes = ['/home', '/chatinit', '/chats', '/myaccount', '/sellproduct', '/browse', '/myproducts','/product'];
-
-  // Check if the current route matches any of the routes in sidebarRoutes
+ 
   
  
   return (

@@ -11,7 +11,11 @@ function ProductInfo() {
     const originalURL = itemObj.image
     const modifiedURL = originalURL.replace("/products/", "/products%2F");
     const navigate = useNavigate();
-
+    console.log(item);
+    function startchat(){
+        sessionStorage.setItem("receiver",item.username)
+        navigate('/chatinit')
+    }
     return (
         <div className='page-container'>
             <Sidebar />
@@ -28,6 +32,9 @@ function ProductInfo() {
                         <p className="item-price">Price: {item.price}</p>
                         <p className="item-seller">Seller: {item.username}</p>
                         {/* More details here */}
+                    </div>
+                    <div className="go-to-chat">
+                        <button onClick={startchat}>Chat with Seller</button>
                     </div>
                 </div>
             </div>

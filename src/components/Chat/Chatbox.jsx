@@ -14,17 +14,19 @@ function Chatbox({ id, participants,sender }) {
         receiver = participant;
       }
     });
-    return receiver;
+    return receiver?receiver:sender;
   }
   useEffect(()=>{
       const rec= assignReceiver(sender,participants)
      setreceiver(rec)
     sessionStorage.setItem("receiver",rec)
-    sessionStorage.setItem("username",sender)
+   
   },[])
    function enterchat(){
-  
- 
+    const rec= assignReceiver(sender,participants)
+    setreceiver(rec)
+   sessionStorage.setItem("receiver",rec)
+    
   navigate("/chatinit")
 }
   return (

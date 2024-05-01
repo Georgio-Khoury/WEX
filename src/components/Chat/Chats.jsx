@@ -17,12 +17,6 @@ function Chats({ id, client, username }) {
         if (response.ok) {
           const data = await response.json();
           console.log(data)
-          // const msgs = data.map((message) => {
-          //   return message.content;
-          // });
-          // console.log(messages)
-          // setMessages((prevMessages) => [...prevMessages, { type: 'message', content: msgs }]);
-          // console.log("the messages are ",{messages})
           const formattedMessages = data.map(message => ({
             content: message.content,
             sender: message.sender,

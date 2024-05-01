@@ -3,6 +3,15 @@
 .page-container {
     display: flex; /* Use flexbox to lay out the sidebar and content */
   }
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the start at first */
+    height: 100vh;
+    padding-top: 20px; /* Add some space at the top */
+    background-color: #f0f0f0;
+    align-items: center; /* Center items horizontally */
+  }
   .content {
     flex: 1; /* Take up the remaining space */
     padding: 20px; /* Add some padding */
