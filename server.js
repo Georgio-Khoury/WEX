@@ -282,6 +282,7 @@ app.delete('/api/deletecart',async (req,res)=>{
 
 app.get('/api/getchats', async (req, res) => {
   const username = req.query.username
+  console.log(username)
   try {
     // Fetch chats from Firestore
     const chatsSnapshot = await getDocs(query(collection(firestore, 'Chats'),where("Participants","array-contains",username)));
@@ -289,6 +290,7 @@ app.get('/api/getchats', async (req, res) => {
       id: doc.id,
       ...doc.data()
     })); 
+    console.log(chats)
     res.json(chats);
   } catch (error) {
     console.error('Error fetching chats:', error);
@@ -306,7 +308,19 @@ app.post('/api/getid',async (req,res)=>{
    docid = await getDoc(doc(firestore,"Chats",id))
   if(docid.exists()) 
   return res.json({"id":docid.id})
-else return res.json(false)
+else{
+  //else we create it
+  await setDoc(doc(firestore,"Chats",id),{
+    "Participants":[username,reciever]
+   })
+   var timestamp = new Date()
+   console.log(timestamp)
+   var time = timestamp.toString()
+   await setDoc(doc(firestore,"Chats",id,"Messages",time),{
+    
+  })
+  res.json({"id":id})
+}
   }catch(error){
     console.log(error)
     res.json({'error':error})
