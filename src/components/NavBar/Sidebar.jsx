@@ -10,7 +10,7 @@ function Sidebar() {
     
     useEffect(() => {
         const unsubscribe = listenForNewMessages(); // Set up listener on component mount
-        return () => {
+        return () => { 
             
             unsubscribe(); // Clean up listener on component unmount
         };
