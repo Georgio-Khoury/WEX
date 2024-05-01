@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { useEffect,useState, useRef } from 'react'
 import Chatbox from './Chatbox'
+import Sidebar from '../NavBar/Sidebar'
 
 function ChatList() {
     var [chats,setchats] = useState([])
@@ -20,17 +22,22 @@ function ChatList() {
         }
         getchats();
     },[])
-    
+     
   return (
-    <>
     
-    {chats.map(chat=>{
+    <div className='page-container'>
+    <Sidebar/>
+        <div className='content'>
+        {chats.map(chat=>{
               
-       return <Chatbox key={chat.id} participants={chat.participants} id={chat.id} sender={username}/>
-       
-    })}
+              return <Chatbox key={chat.id} participants={chat.participants} id={chat.id} sender={username}/>
+              
+           })}
+          </div>
+        </div>
+    
  
-    </>
+    
   )
 }
 

@@ -1,0 +1,110 @@
+/* Sidebar.css */
+
+.page-container {
+    display: flex; /* Use flexbox to lay out the sidebar and content */
+  }
+  .content {
+    flex: 1; /* Take up the remaining space */
+    padding: 20px; /* Add some padding */
+    /* Add any additional styling you need for your content area */
+  }
+  .navbar-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .navbar-item {
+   
+    padding: 10px 25px;
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+  }
+  .navbar-item a{
+    text-decoration: none;
+    color: black;
+  }
+  .navbar-item:not(:last-child) {
+    margin-bottom: 10px; /* Add some space between the nav items, if needed */
+  }
+  .navbar-item:hover {
+    background-color: #ddd; /* Highlight the item on hover */
+  }
+  /* Profile circle */
+  .profile-circle {
+    width: 80px; /* Adjust the size if needed */
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 20px; 
+      margin-top: 15px;
+  }
+    
+  .profile-circle img {
+      width: 100%; 
+      height: 100%;
+      object-fit: cover;
+    } 
+    .navbar-list {
+      list-style: none;
+      padding: 0;
+      margin-top: -75px;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* This will center the items vertically */
+  }
+  .account-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content vertically */
+    padding: 30px;
+    margin-top: 25px;
+  }
+  
+  .account-profile-pic {
+    border-radius: 50%; /* Makes the image round */
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+    object-fit: cover; /* Ensures the image covers the area, useful for different aspect ratios */
+    border: 3px solid #ccc; /* Adds a border around the image */
+    margin-bottom: 10px; /* Adds space between the image and the text */
+  }
+  
+  .profile-info {
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 70px; /* Increased padding for more space */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px; /* Increased max-width for a wider box */
+    margin: auto; /* This will center the box if the container is wider */
+  }
+  
+  
+  .profile-info h3 {
+    margin-top: 0;
+    color: #333; /* Dark text for the name */
+    margin-bottom: 5px; /* Space between name and email */
+  }
+  
+  .profile-info p {
+    color: #666; /* Lighter text for details */
+    margin: 5px 0; /* Spacing between details */
+  }
+  
+  .profile-info .action-button {
+    background-color: #007bff; /* Example button color */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Space above the button */
+  }
+  
+  .profile-info .action-button:hover {
+    background-color: #0056b3; /* Darker color on hover */
+  }

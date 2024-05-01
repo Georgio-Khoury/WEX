@@ -30,8 +30,9 @@ function Login() {
           sessionStorage.setItem('username',data.username)
           sessionStorage.setItem('name',data.name)
           sessionStorage.setItem("pfp", data.pfp)
-
-          console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'))
+          sessionStorage.setItem("pn",data.pn)
+          sessionStorage.setItem("email",data.email)
+          console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'),sessionStorage.getItem('email'))
           
         }
     
@@ -44,7 +45,7 @@ function Login() {
             const userCredential = await signInWithEmailAndPassword(auth, info.email, info.password);
             seterrormsg('')
             await informbackend()
-            navigate('/home');
+            navigate('/product');
             console.log(userCredential)
         } catch (error) {
             seterrormsg("invalid credentials")

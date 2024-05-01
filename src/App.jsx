@@ -1,31 +1,53 @@
 import './App.css';
 import Appi from './Appi';
-import Home from './Home';
+import Home from './components/NavBar/Home';
 import Login from './components/Authentication/Login';
 import Register from './components/Authentication/Register';
-
+import { useEffect, useState,useLayoutEffect } from 'react';
 import ChatList from './components/Chat/ChatList';
 import ForgotPassword from './components/Authentication/ForgotPassword';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChatInit from './components/Chat/ChatInit';
-//import Test from './Test';
+
+import MyAccount from './components/MyAccount/MyAccount';
+import Sidebar from './components/NavBar/Sidebar';
+import SellProduct from './components/Product/SellProduct';
+import Product from './components/Product/Product';
+import MyProducts from './components/Product/MyProducts';
+import Logout from './components/Authentication/Logout';
+import ProductInfo from './components/Product/ProductInfo';
+
 
 function App() {
+  const sidebarRoutes = ['/home', '/chatinit', '/chats', '/myaccount', '/sellproduct', '/browse', '/myproducts','/product'];
+
+  // Check if the current route matches any of the routes in sidebarRoutes
+  
+ 
   return (
-    <div>
-      <BrowserRouter>
+    <BrowserRouter>
+    
+    
+      
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/chat" element={<ChatInit/>}/>
-          <Route path="/test" element={<Appi/>}/>
-          <Route path="/chats" element ={<ChatList/>}/>
+          <Route path="/home" element={<Product />} />
+          <Route path="/chatinit" element={<ChatInit/>}/>
+          <Route path="/inbox" element ={<ChatList/>}/>
           <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/myaccount" Component={MyAccount}/>
+          <Route path="/sellproduct" Component={SellProduct}/>
+          <Route path="/product" Component={Product}/>
+          <Route path="/myproducts" element={<MyProducts/>}/>
+          <Route path="/productinfo/:item" element={<ProductInfo />} />
                       {/* <Route path="/test" element={<Test />} /> */}
         </Routes>
-      </BrowserRouter>
-    </div>
+        
+  
+    
+  
+    </BrowserRouter>
   );
 }
 

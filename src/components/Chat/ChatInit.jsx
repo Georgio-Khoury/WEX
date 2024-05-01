@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 
 import Chats from './Chats';
+import Sidebar from '../NavBar/Sidebar';
 
 function ChatInit() {
   const [id, setId] = useState('');
@@ -59,9 +60,12 @@ function ChatInit() {
   }, []); // Run only on component mount
 
   return (
-    <div>
+    <div className='page-container'>
+      <Sidebar/>
+    <div className='content'>
       {/* Render the Chat component with the ID and WebSocket client */}
       <Chats id={id} client={client} username={user} reciever={rec} />
+      </div>
     </div>
   );
 }

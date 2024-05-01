@@ -25,7 +25,7 @@ function Chatbox({ id, participants,sender }) {
    function enterchat(){
   
  
-  navigate("/chat")
+  navigate("/chatinit")
 }
   return (
     <div className="chatbox" onClick={enterchat} >
