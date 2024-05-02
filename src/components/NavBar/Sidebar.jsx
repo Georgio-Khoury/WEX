@@ -5,12 +5,19 @@ import { Link } from 'react-router-dom';
 import {onSnapshot,getFirestore,collection,query,where,getDocs} from 'firebase/firestore'
 import Logout from '../Authentication/Logout';
 function Sidebar() {
+    
     const [logout,setlogout] = useState(false)
     const [newMessage, setnewMessage] = useState(false);
-    const first = useRef(true)
-    
+    var first = true
+    setTimeout(() => {
+        console.log('kholes')
+        first=false
+    },10000)
     useEffect(() => {
-        const unsubscribe = listenForNewMessages(); // Set up listener on component mount
+        const unsubscribe = listenForNewMessages();
+        
+        console.log('setup listener complet')
+        // Set up listener on component mount
         return () => { 
             
             unsubscribe(); // Clean up listener on component unmount
@@ -21,39 +28,48 @@ function Sidebar() {
         const db = getFirestore();
         const chatsRef = collection(db, 'Chats');
         const user = sessionStorage.getItem('username')
-        console.log(user)
+       
         const q = query(chatsRef, where('Participants', 'array-contains', user));
         
-        console.log("querry set")
+        
         return onSnapshot(q, (snapshot) => {
-            
+           
             snapshot.forEach((doc) => {
-                console.log('ahell')
+               const snapsize = snapshot.docChanges().length
+             
                 const messagesRef = collection(doc.ref, 'Messages');
                 const messagesQuery = query(messagesRef);
-                console.log('honee')
+            
                 const unsubscribe = onSnapshot(messagesQuery, (messagesSnapshot) => {
-                    
-                   console.log(first)
+                   
+                 
+                 
                     
                     messagesSnapshot.docChanges().forEach((change) => {
-                        if (change.type === 'added'&&!first.current) {
+            
+                        
+                        if (change.type === 'added'&&first==false) {
                             console.log('new msg recieved')
-                            
+                    
                             setnewMessage(true);
 
                         }
                         
                     });
-                    first.current=false
+                    
+                    
                 });
+               
+                
+                
             });
         })
+        
     }
     const logoutpop=()=>{
-        console.log('clicked')
+       
         setlogout(true)
-        console.log(logout)
+      
     }
 
     return (
@@ -70,7 +86,7 @@ function Sidebar() {
                 </li>
                 <li className={`navbar-item ${newMessage ? 'new-message' : ''}`}>
                     <Link to="/inbox">
-                        Chat {console.log(newMessage)}{newMessage && <span className="new-message-label">New</span>}
+                        Chat {newMessage && <span className="new-message-label">New</span>}
                     </Link>
                 </li>
                 <li className="navbar-item">
@@ -84,7 +100,7 @@ function Sidebar() {
     );
 }
 
-export default Sidebar;
+export default React.memo(Sidebar);
 
 
 

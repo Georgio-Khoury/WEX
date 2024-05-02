@@ -42,29 +42,36 @@ function Chats({ id, client, username }) {
     
 
     client.onopen = () => {
-      console.log('WebSocket Client Connected');
+      console.log('WebSocket Client Connected here');
     };
 
     client.onmessage = (message) => {
       const parsedMessage = JSON.parse(message.data);
-      console.log(parsedMessage)
-      if (parsedMessage.type === 'message') {
+      console.log("sender is",parsedMessage.sender)
+      if (parsedMessage.type === 'message' && parsedMessage.chatID === id&&parsedMessage.sender!=username) {
         setMessages((prevMessages) => [...prevMessages, parsedMessage]);
       }
     };
 
     //Cleanup function to close WebSocket connection
-    // return () => {
-    //   client.close();
-    //   console.log("WebSocket connection closed");
-    // };
+    //return () => {
+      // client.close();
+      //console.log("WebSocket connection closed");
+  //   };
   }
   }, [client]);
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
   };
-
+  function handlekeydown(e) {
+    if(e.key === 'Enter') {
+      console.log('pressed')
+      sendMessage();
+    }else{
+      console.log('naa')
+    }
+  }
   const sendMessage =  () => {
     if (client.readyState === WebSocket.OPEN) {
     if (message.trim() !== '') {
@@ -83,7 +90,7 @@ function Chats({ id, client, username }) {
         timestamp
       };
       client.send(JSON.stringify(newMessage));
-      //setMessages((prevMessages) => [...prevMessages, { type: 'message', content: `You: ${message}` }]);
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
       setMessage('');
     }
   } else {
@@ -97,8 +104,8 @@ function Chats({ id, client, username }) {
     }
   }, [messages]);
   return (
-    <>
-      <div ref={messageContainerRef} className="message-container">
+    <div onKeyDown={handlekeydown}>
+      <div ref={messageContainerRef} className="message-container"  onKeyDown={handlekeydown}>
         {messages.map((msg, index) => (
         
           <Message key={index} content={msg.content} timestamp={msg.timestamp} sender={msg.sender === username ? "You" : msg.sender}   className="message"></Message>
@@ -113,10 +120,11 @@ function Chats({ id, client, username }) {
     placeholder="Type your message..."
     value={message}
     onChange={handleMessageChange}
+    onKeyDown={handlekeydown}
       />
-    <button className="sendbutton" onClick={sendMessage}>Send</button>
+    <button className="sendbutton"  onClick={sendMessage}>Send</button>
       </div>
-      </>
+      </div>
   );
 }
 

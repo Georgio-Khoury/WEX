@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import Sidebar from '../NavBar/Sidebar'
 import { useNavigate } from 'react-router-dom';
-
+import './Product.css'
 function Product() {
   const [categ, setCateg] = useState('');
   const [items, setItems] = useState([]);
-  const categories = ['car', 'appliance', 'electronics', 'books'];
+  const categories = ['car', 'appliance', 'electronics', 'books',"accessories",'apartment'];
   const navigate = useNavigate()
   useEffect(() => {
       if (categ) {
@@ -56,4 +56,4 @@ function Product() {
   )
 }
 
-export default Product
+export default React.memo(Product)
