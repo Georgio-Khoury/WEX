@@ -246,7 +246,15 @@ app.get('/api/getcart',async (req,res)=>{
     })
     console.log(ids)
     //then query every item by its id and return it
-    res.send("Ok")
+   
+
+    const items = await Promise.all(ids.map(async (id) => {
+      const item = await getDoc(doc(firestore, "Products", id));
+             return item
+      
+  }));
+  const products = items.map(item=>item.data())
+    res.json({"products":products})
   }catch(error){
     console.log(error)
     res.json({"error":error})
@@ -256,7 +264,7 @@ app.get('/api/getcart',async (req,res)=>{
 
 
 app.post('/api/addcart',async (req,res)=>{
-  //let username = req.session.username
+  
   const {username,id} = req.body
   //the id is the item's id
   try{
