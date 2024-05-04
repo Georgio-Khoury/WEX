@@ -17,7 +17,21 @@ function MyProductInfo() {
   const originalURL = itemObj.image
   const modifiedURL = originalURL.replace("/products/", "/products%2F");
   const navigate = useNavigate();
-
+async function deleteitem(){
+  var id = item.id
+  const response = await fetch(`/api/deleteitem`,{
+    method:'DELETE',
+    headers: {
+      'Content-Type': 'application/json', // Specify content type as JSON
+    },
+    body: JSON.stringify({id})
+  })
+  if(response.ok){
+    navigate('/myproducts')
+  }else{
+    console.log('failed')
+  }
+}
 
   async function handleSubmit(){
     console.log(item)
@@ -80,7 +94,9 @@ function MyProductInfo() {
                    <label htmlFor="price">Price:</label>
                    <input type="text" id="price" name="price" value={editedItem.price} onChange={handleChange} />
                  </div>
-                
+                <div>
+                  <button onClick={()=>seteditmode(false)}>Cancel Edit</button>
+                  </div>
                </div>
                
                 ) : (
@@ -88,7 +104,7 @@ function MyProductInfo() {
                     <h1>{editedItem.Title || "Item Details"}</h1>
                     <p className="item-description">{editedItem.Description}</p>
                     <p className="item-price">Price: {editedItem.price}</p>
-                
+                    <button onClick={deleteitem}>Delete item</button>
                   </div>
                 )}
                 <button onClick={editMode ? handleSubmit : handleEdit}>{editMode ? "Submit Changes" : "Edit"}</button>
