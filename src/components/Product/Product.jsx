@@ -3,17 +3,19 @@ import Sidebar from '../NavBar/Sidebar'
 import { useNavigate } from 'react-router-dom';
 import './Product.css'
 function Product() {
-  const [categ, setCateg] = useState('');
+  const [categ, setCateg] = useState(sessionStorage.getItem('categ'));
   const [items, setItems] = useState([]);
   const [noitem, setnoitem] = useState(false);
   const categories = ['car', 'electronics', 'book',"accessories",'apartment','appliance','sports','furniture','games','pets'];
   const navigate = useNavigate()
+  console.log('categ is',categ)
   useEffect(() => {
       if (categ) {
           getdata();
       }
   }, [categ]);
   useEffect(() => {
+    console.log(categ)
     if (categ) {
         getdata();
     }
@@ -47,7 +49,7 @@ function Product() {
     <div className="categories">
    
                 {categories.map((category, index) => (
-                    <button key={index} onClick={() => setCateg(category)}>
+                    <button key={index} onClick={() => {setCateg(category);sessionStorage.setItem('categ',category)}}>
                         {category.charAt(0).toUpperCase() + category.slice(1)}
                     </button>
                 ))}

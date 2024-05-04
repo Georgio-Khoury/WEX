@@ -32,6 +32,7 @@ function Login() {
           sessionStorage.setItem("pfp", data.pfp)
           sessionStorage.setItem("pn",data.pn)
           sessionStorage.setItem("email",data.email)
+          sessionStorage.setItem('categ','')
           console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'),sessionStorage.getItem('email'))
           
         }
