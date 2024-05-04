@@ -5,7 +5,10 @@ const ws = require( "ws" ) ;
 const app = express()
 const server = http.createServer(app)
 const wss = new ws.Server({ server });
-
+const {initializeFireBase,inifire} = require('./firebase')
+const {collection,getDocs,deleteDoc,doc,where,query, addDoc,Timestamp, serverTimestamp,setDoc,getDoc, FieldValue, updateDoc, orderBy }=require("firebase/firestore");
+const firebase = initializeFireBase()
+const firestore= inifire()
 
 wss.on('connection',(ws,req)=>{
     console.log("connected to msgs")
