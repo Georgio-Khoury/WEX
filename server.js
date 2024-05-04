@@ -65,7 +65,7 @@ app.post('/api/adduser',upload, async (req, res) => {
     email = email.toLowerCase()
 
     //checking if the document already exists(la2an usernames are unique)
-    const userDocRef = doc(collection(firestore, 'Users'), username);//points to the document with ID=username
+    const userDocRef = doc(collection(firestore, 'Users'), username.toLowerCase());//points to the document with ID=username
     console.log('here')
     const docSnapshot = await getDoc(userDocRef);//fetches the doc with the username 
     console.log('got doc')
@@ -102,7 +102,7 @@ app.post('/api/adduser',upload, async (req, res) => {
       profilepic,
  
     });
-    await setDoc(doc(firestore, "Users",username,"Cart","0"),{
+    await setDoc(doc(firestore, "Users",username.toLowerCase(),"Cart","0"),{
       item:""
     });
     res.json({ id: username });
@@ -123,19 +123,23 @@ app.post('/api/logout',async (req,res)=>{
 })
 
 //------------------------------------------------
-// items management
-app.get('/api/edititem',async (req,res)=>{
+// items management 
+app.post('/api/edititem',async (req,res)=>{
   const {id,info} = req.body
+  console.log(id)
+  console.log(info)
   const docref = doc(firestore,'Products',id)
-  try{const updating = await updateDoc(docref,{
+  try{const updating = await updateDoc(docref,{ 
+    Title:info.Title,
     Description: info.Description,
     price: info.price,
-    category: info.categ,
-    id: info.id,
-    image:  info.image,
+    category: info.category,
+    id: info.id, 
+   
     username: info.username
   })
-  res.send('ok')
+  console.log('updated')
+  res.json({"error":"Item edited Successfully"})
 }catch(error){
     console.log(error)
     res.json({"error":error})
@@ -145,7 +149,7 @@ app.get('/api/edititem',async (req,res)=>{
 
 app.get('/api/myitems',async (req,res)=>{
   //const username = req.session.username
-  const {username} = req.body
+  const username = req.query.username
   console.log(username)
   const q = query(collection(firestore,"Products"),where('username','==',username))
   const result = await getDocs(q)
@@ -234,7 +238,7 @@ app.get('/api/getcart',async (req,res)=>{
   try{
     const docref = collection(firestore,"Users",username,"Cart")
     const cartitems = await getDocs(docref)
-    //map throught the docs and extract the item ids
+  
     const ids = cartitems.docs.map(doc=>{
       console.log(doc.id)
       return doc.id
