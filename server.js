@@ -18,7 +18,7 @@ const firestore= inifire()
 const {getStorage,ref,uploadBytes, uploadBytesResumable} = require('firebase/storage');
 const { time } = require('console');
 app.use(cors({
-    origin: 'https://wex-1.onreder.com',  // replace with your frontend's URL
+    origin: 'https://wex-1.onrender.com',  // replace with your frontend's URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // enable credentials (cookies, authorization headers)
   }));
