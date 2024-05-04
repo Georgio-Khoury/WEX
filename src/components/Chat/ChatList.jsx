@@ -2,7 +2,7 @@
 import { useEffect,useState, useRef } from 'react'
 import Chatbox from './Chatbox'
 import Sidebar from '../NavBar/Sidebar'
-
+import {API}  from '../../apiconfig.js'
 function ChatList() {
     var [chats,setchats] = useState([])
     const [username,setusername] = useState(sessionStorage.getItem("username"))
@@ -10,7 +10,7 @@ function ChatList() {
         
         const getchats= async ()=>{
             
-            const response = await fetch(`/api/getchats?username=${username}`)
+            const response = await fetch(`${API}/getchats?username=${username}`)
             const data = await response.json();
             if(response.ok){
              var ch=   data.map(chat=>({

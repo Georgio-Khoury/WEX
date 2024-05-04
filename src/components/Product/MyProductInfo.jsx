@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { useParams,useNavigate } from 'react-router-dom';
 import Sidebar from '../NavBar/Sidebar'
+
+
 import './MyProductInfo.css'
+import { API } from '../../apiconfig';
 function MyProductInfo() {
   const [errormsg, seterrormsg] = useState();
   
@@ -19,7 +22,7 @@ function MyProductInfo() {
   const navigate = useNavigate();
 async function deleteitem(){
   var id = item.id
-  const response = await fetch(`/api/deleteitem`,{
+  const response = await fetch(`${API}/deleteitem`,{
     method:'DELETE',
     headers: {
       'Content-Type': 'application/json', // Specify content type as JSON
@@ -37,7 +40,7 @@ async function deleteitem(){
     console.log(item)
     var id = item.id
     var info = editedItem
-    const response = await fetch('/api/edititem',{
+    const response = await fetch(`${API}/edititem`,{
       method:'POST',
       headers: {
         'Content-Type': 'application/json', // Specify content type as JSON

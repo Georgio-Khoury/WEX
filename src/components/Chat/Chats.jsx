@@ -3,6 +3,7 @@ import  { useState, useEffect,useRef } from 'react';
 import './Chats.css'
 import Message from './Message' 
 import EmojiPicker from 'emoji-picker-react';
+import { API } from '../../apiconfig';
 function Chats({ id, client, username }) {
 
  
@@ -24,7 +25,7 @@ function Chats({ id, client, username }) {
   useEffect(() => {
     async function getMessages() {
       try {
-        const response = await fetch(`/api/getmessages?chatid=${id}`);
+        const response = await fetch(`${API}/getmessages?chatid=${id}`);
         if (response.ok) {
           const data = await response.json();
           console.log(data)

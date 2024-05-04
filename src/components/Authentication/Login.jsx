@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { app } from '../../../firebaseConfig';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
+import { API } from '../../apiconfig.js'
 
 function Login() {
     
@@ -24,7 +24,7 @@ function Login() {
 
     async function informbackend(){
         const email= info.email
-         const response = await fetch(`https://wex-1.onrender.com/api/login/${email}`)
+         const response = await fetch(`${API}/login/${email}`)
           const data =  await response.json()
           console.log(data)
           sessionStorage.setItem('username',data.username)

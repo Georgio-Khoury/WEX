@@ -22,7 +22,7 @@ function ForgotPassword() {
         const auth = getAuth(app);
 
         const config = {
-            url: 'http://localhost:5173/', // Replace with your login route
+            url: 'https://wex-1.onrender.com', // Replace with your login route
             handleCodeInApp: true,
         };
         try {

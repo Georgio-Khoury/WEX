@@ -1,6 +1,7 @@
 import React , {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../NavBar/Sidebar';
+import { API } from '../../apiconfig';
 import './SellProduct.css'
 function SellProduct() {
     const categories = ['car', 'electronics', 'book',"accessories",'apartment','appliance','sports','pets','furniture','games']
@@ -44,7 +45,7 @@ function SellProduct() {
         formdata.append('username',sessionStorage.getItem('username'))
        
         try{
-        const response = await fetch('/api/additem',{
+        const response = await fetch(`${API}/additem`,{
             method: 'POST',
             
             body: formdata

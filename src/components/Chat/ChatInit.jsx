@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
-
+import { API,WSO } from '../../apiconfig';
 import Chats from './Chats';
 import Sidebar from '../NavBar/Sidebar';
 
@@ -22,7 +22,7 @@ function ChatInit() {
         console.log("res",reciever)
         console.log("sender",username)
         console.log("Fetching ID...");
-        const response = await fetch('/api/getid', {
+        const response = await fetch(`${API}/getid`, {
           method: 'POST', 
           headers: {
             'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ function ChatInit() {
           // Create WebSocket client with the fetched ID
           
           //const newClient = new W3CWebSocket(`ws://localhost:3002?chatID=${data.id}`);
-          const newClient = new W3CWebSocket(`wss://websock-f60d.onrender.com?${data.id}`);
+          const newClient = new W3CWebSocket(`${WSO}?${data.id}`);
           setClient(newClient);
           console.log("WebSocket client created");
         } else {

@@ -1,12 +1,13 @@
 import React,{useEffect, useState} from 'react'
 import Sidebar from '../NavBar/Sidebar'
 import { useNavigate } from 'react-router-dom';
+import { API } from '../../apiconfig';
 function MyProducts() {
   const [items, setitems] = useState([]);
   const navigate = useNavigate()
   useEffect(()=>{
     async function myitems(){
-      const response = await fetch(`/api/myitems?username=${sessionStorage.getItem('username')}`)
+      const response = await fetch(`${API}/myitems?username=${sessionStorage.getItem('username')}`)
       const data =await  response.json()
       if(response.ok){
         setitems(data.products)

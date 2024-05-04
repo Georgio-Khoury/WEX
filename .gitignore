@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 firebaseConfig.js
 node_modules
+*.env
+apiconfig.js

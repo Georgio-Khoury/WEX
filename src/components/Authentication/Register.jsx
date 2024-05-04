@@ -3,6 +3,7 @@ import "./Register.css";
 import { useNavigate } from 'react-router-dom';
 import { app } from '../../../firebaseConfig';
 import {getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { API } from '../../apiconfig.js';
 function Register() {
 
     const initialFormData = {
@@ -52,7 +53,7 @@ function Register() {
         formdata.append('image',file)
        
         try{
-        const response = await fetch('/api/adduser',{
+        const response = await fetch(`${API}/adduser`,{
             method: 'POST',
             
             body: formdata

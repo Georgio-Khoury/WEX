@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Sidebar from '../NavBar/Sidebar'
 import { useNavigate } from 'react-router-dom';
 import './Product.css'
+import { API } from '../../apiconfig';
 function Product() {
   const [categ, setCateg] = useState(sessionStorage.getItem('categ'));
   const [items, setItems] = useState([]);
@@ -21,7 +22,7 @@ function Product() {
     }
 }, []);
   async function getdata() {
-    const response = await fetch(`/api/getitems?categ=${categ}`, {
+    const response = await fetch(`${API}/getitems?categ=${categ}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
