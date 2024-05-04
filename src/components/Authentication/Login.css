@@ -1,7 +1,7 @@
 .login-container {
     width: 400px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 150px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -48,8 +48,7 @@
 .login-container button.register-btn {
     background: none;
     border: none;
-    color: blue;
-    text-decoration: underline;
+    color: #007bff;
     cursor: pointer;
     font-size: inherit; /* Inherit font size from parent */
     margin-top: 10px; /* Adjust margin if needed */
@@ -57,5 +56,16 @@
 
 /* Style for the "Register" button on hover */
 .login-container button.register-btn:hover {
-    color: #007bff; /* Change color on hover to a darker shade of blue */
+    color: #04305c;
 }
+.forgotPass {
+    display: block; /* This makes the link appear on its own line */
+    color: #007bff;
+    cursor: pointer; /* Changes the cursor to the pointer hand */
+    font-size: inherit; /* Ensures it matches the font size of surrounding text */
+    padding: 5px 0; /* Padding to increase the clickable area for better UX */
+}
+.forgotPass:hover {
+    color: #04305c;
+}
+

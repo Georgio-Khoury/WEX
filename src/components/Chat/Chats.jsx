@@ -2,14 +2,25 @@
 import  { useState, useEffect,useRef } from 'react';
 import './Chats.css'
 import Message from './Message' 
+import EmojiPicker from 'emoji-picker-react';
 function Chats({ id, client, username }) {
-  
+
  
   console.log(username)
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const isFirstRun = useRef(true);
   const messageContainerRef = useRef(null);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const onEmojiClick = (emojiObject, event) => {
+    console.log('Selected emoji:', emojiObject);
+    setMessage(prev => prev + emojiObject.emoji);
+  };
+
+  const toggleEmojiPicker = () => {
+    setShowEmojiPicker(!showEmojiPicker);
+  };
+
   useEffect(() => {
     async function getMessages() {
       try {
@@ -66,10 +77,8 @@ function Chats({ id, client, username }) {
   };
   function handlekeydown(e) {
     if(e.key === 'Enter') {
-      console.log('pressed')
+     
       sendMessage();
-    }else{
-      console.log('naa')
     }
   }
   const sendMessage =  () => {
@@ -104,7 +113,7 @@ function Chats({ id, client, username }) {
     }
   }, [messages]);
   return (
-    <div onKeyDown={handlekeydown}>
+    <div className="chat-container" onKeyDown={handlekeydown}>
       <div ref={messageContainerRef} className="message-container"  onKeyDown={handlekeydown}>
         {messages.map((msg, index) => (
         
@@ -115,14 +124,17 @@ function Chats({ id, client, username }) {
 
       </div>
       <div className="input-container">
+      <button onClick={toggleEmojiPicker} className="emoji-button">😊</button>
+        {showEmojiPicker && <EmojiPicker onEmojiClick={onEmojiClick} />}
       <input
+      className="message-input"
     type="text"
     placeholder="Type your message..."
     value={message}
     onChange={handleMessageChange}
     onKeyDown={handlekeydown}
       />
-    <button className="sendbutton"  onClick={sendMessage}>Send</button>
+    <button className="send-button"  onClick={sendMessage} >Send</button>
       </div>
       </div>
   );

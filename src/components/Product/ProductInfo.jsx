@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../NavBar/Sidebar';
 import { useParams,useNavigate } from 'react-router-dom';
-
+import './ProductInfo.css'
 function ProductInfo() {
  
     var { item } = useParams(); // Get the serialized object from the URL parameter

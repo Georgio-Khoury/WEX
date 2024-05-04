@@ -15,6 +15,7 @@ import Product from './components/Product/Product';
 import MyProducts from './components/Product/MyProducts';
 
 import ProductInfo from './components/Product/ProductInfo';
+import MyProductInfo from './components/Product/MyProductInfo';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/sellproduct" Component={SellProduct}/>
           <Route path="/product" Component={Product}/>
           <Route path="/myproducts" element={<MyProducts/>}/>
+          <Route path="/myproductsinfo/:item" element={<MyProductInfo/>}/>
           <Route path="/productinfo/:item" element={<ProductInfo />} />
                       {/* <Route path="/test" element={<Test />} /> */}
         </Routes>

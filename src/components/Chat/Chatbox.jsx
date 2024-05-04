@@ -30,9 +30,9 @@ function Chatbox({ id, participants,sender }) {
   navigate("/chatinit")
 }
   return (
-    <div className="chatbox" onClick={enterchat} >
-      <div>ID: {id}</div>
-      <div>Participant: {receiver}</div>
+    <div className="chatbox" onClick={enterchat}>
+      <div className="chat-info">Chat ID: {id}</div>
+      <div className="participant-info">Participant: {receiver}</div>
     </div>
   );
 }

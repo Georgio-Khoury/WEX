@@ -1,30 +1,37 @@
 .message-box {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 50%;
-    margin-left: auto; /* Center the message box horizontally */
-  margin-right: auto;
-  }
-  
-  .message-sender {
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .message-content {
-    margin: 10px 0;
-  }
-  
-  .message-timestamp {
-    color: #666;
-    margin: 0;
-    font-size: 12px;
-  }
-  .message-container {
-    max-height: 400px; /* Set a maximum height for the message container */
-    overflow-y: auto; /* Enable vertical scrolling */
-  }
- 
+  margin-bottom: 8px;
+  padding: 10px;
+  background-color: #f0f0f0; /* Light grey background */
+  border-radius: 10px; /* Rounded corners for the message box */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  position: relative;
+  max-width: 80%;
+}
+
+.message-sender {
+  font-size: 0.9rem; /* Smaller text for sender */
+  font-weight: bold; /* Bold text for sender name */
+  color: #333; /* Dark grey text for better readability */
+  margin-bottom: 4px; /* Small space between sender and content */
+}
+
+.message-content {
+  font-size: 1rem; /* Regular size for message content */
+  line-height: 1.4; /* Good line spacing for readability */
+  color: #333; /* Consistent text color with sender */
+}
+
+.message-timestamp {
+  font-size: 0.8rem; /* Smaller font size for timestamp */
+  color: #666; /* Lighter grey for less emphasis */
+  position: absolute; /* Position absolutely within the message box */
+  bottom: 4px; /* Positioned at the bottom of the box */
+  right: 10px; /* Small padding from the right */
+  margin: 0; /* Remove default margins */
+}
+
+/* Optional: Different background for messages from 'You' */
+.message-box.you {
+  background-color: #dbe9ff; /* Light blue background for your messages */
+  margin-left: auto; /* Align to the right */
+}

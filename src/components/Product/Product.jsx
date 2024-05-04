@@ -5,13 +5,19 @@ import './Product.css'
 function Product() {
   const [categ, setCateg] = useState('');
   const [items, setItems] = useState([]);
-  const categories = ['car', 'appliance', 'electronics', 'books',"accessories",'apartment'];
+  const [noitem, setnoitem] = useState(false);
+  const categories = ['car', 'electronics', 'book',"accessories",'apartment','appliance','sports','furniture','games','pets'];
   const navigate = useNavigate()
   useEffect(() => {
       if (categ) {
           getdata();
       }
   }, [categ]);
+  useEffect(() => {
+    if (categ) {
+        getdata();
+    }
+}, []);
   async function getdata() {
     const response = await fetch(`/api/getitems?categ=${categ}`, {
         method: 'GET',
@@ -22,9 +28,13 @@ function Product() {
 
     if (response.ok) {
         const data = await response.json();
+        setnoitem(false)
         setItems(data.product);
     } else {
         console.log('Error fetching items:', response.statusText);
+        setnoitem(true)
+        setItems([])
+        
     }
 
 
@@ -33,7 +43,9 @@ function Product() {
     <div className='page-container'>
 <Sidebar/>
     <div className='content'>
+       
     <div className="categories">
+   
                 {categories.map((category, index) => (
                     <button key={index} onClick={() => setCateg(category)}>
                         {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -41,12 +53,13 @@ function Product() {
                 ))}
             </div>
             <div className="items-container">
+            {noitem&& <h1>No item available</h1>}
                 {items.map((item, index) => {
                   var itemobj = encodeURIComponent(JSON.stringify(item))
                   return(
                     <div key={index} className="item" onClick={()=>navigate(`/productinfo/${itemobj}`)}>
                         <img src={item.image} alt="Product" />
-                        <h3>{item.Description}</h3>
+                        <h1>{item.Title}</h1>
                         <p>{item.price}</p>
                     </div>
 )})}
@@ -56,4 +69,4 @@ function Product() {
   )
 }
 
-export default React.memo(Product)
+export default Product

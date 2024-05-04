@@ -1,10 +1,35 @@
+/* Chatbox.css */
 .chatbox {
-    width: 300px; /* Set the width of the chatbox */
-    padding: 20px; /* Add padding for spacing */
-    border: 1px solid #ccc; /* Add a border */
-    border-radius: 8px; /* Add border radius for rounded corners */
-    background-color: #f9f9f9; /* Add background color */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-    /* Add more styles as needed */
+  padding: 12px 16px;
+  background-color: #ffffff; /* White background for each chat box */
+  border: 1px solid #ddd; /* Light grey border for some depth */
+  border-radius: 8px; /* Rounded corners */
+  margin: 8px 0; /* Spacing between each chatbox */
+  cursor: pointer; /* Indicates the element is clickable */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+  display: flex;
+  justify-content: space-between; /* Space content evenly */
+  align-items: center; /* Align items vertically */
+}
+
+.chatbox:hover {
+  background-color: #f5f5f5; /* Slightly darker background on hover */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Soft shadow to lift the element on hover */
+}
+
+.chatbox div {
+  color: #333; /* Dark grey text for better readability */
+  font-size: 0.9rem; /* Moderate text size */
+}
+
+.chatbox .participant-info {
+  font-weight: bold; /* Bold text for emphasis */
+}
+
+/* Responsive adjustments if necessary */
+@media (max-width: 600px) {
+  .chatbox {
+      flex-direction: column;
+      text-align: center;
   }
-  
+}

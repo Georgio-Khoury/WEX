@@ -106,10 +106,10 @@ function Register() {
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <input onChange={handleChange} value={info.confirmPassword} type="password" placeholder="**************" id="confirmPassword" name="confirmPassword" />
                 
-                <button type="submit">Register</button>
+                <button type="submit" className="register-btn">Register</button>
                 <button className="login-btn" onClick={() => navigate('/')}>Already have an account? Login here.</button>
             </form>
-            {errormsg &&<p style={{color:'red'}}>{errormsg}</p>}
+            {errormsg &&<p className='error-msg'>{errormsg}</p>}
         </div>
     )
 }

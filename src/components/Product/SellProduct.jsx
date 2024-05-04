@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Sidebar from '../NavBar/Sidebar';
 import './SellProduct.css'
 function SellProduct() {
-    
+    const categories = ['car', 'electronics', 'book',"accessories",'apartment','appliance','sports','pets','furniture','games']
       const initialFormData = {
         Title: "",
         image:null,
@@ -81,7 +81,14 @@ function SellProduct() {
         <input onChange={handleChange} value={info.description} type="text" placeholder='Description' id="Description" name="description" />
        
         <label htmlFor="category">Category</label>
-        <input onChange={handleChange} value={info.category} type="text" placeholder='Category' id="Category" name="category" />
+<select onChange={handleChange} value={info.category} id="category" name="category">
+  <option value="">Select a category</option>
+  {categories.map((category, index) => (
+    <option key={index} value={category}>
+      {category.charAt(0).toUpperCase() + category.slice(1)}
+    </option>
+  ))}
+</select>
         
         <label htmlFor="price">Price</label>
         <input onChange={handleChange} value={info.price} type="text" placeholder='price' id="price" name="price" />
