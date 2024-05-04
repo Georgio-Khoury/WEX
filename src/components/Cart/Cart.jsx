@@ -7,7 +7,7 @@ function Cart() {
             const response = await fetch(`/api/getcart?username=${sessionStorage.getItem('username')}`)
             const data = await response.json()
             if(response.ok){
-                setcart(data)
+                setcart(data.products)
             }else{
                 console.log('no cart data')
             }
