@@ -126,8 +126,8 @@ app.post('/api/logout',async (req,res)=>{
 // items management 
 app.post('/api/edititem',async (req,res)=>{
   const {id,info} = req.body
-  console.log(id)
-  console.log(info)
+  //console.log(id)
+  //console.log(info)
   const docref = doc(firestore,'Products',id)
   try{const updating = await updateDoc(docref,{ 
     Title:info.Title,
@@ -153,7 +153,7 @@ app.get('/api/myitems',async (req,res)=>{
   console.log(username)
   const q = query(collection(firestore,"Products"),where('username','==',username))
   const result = await getDocs(q)
-  console.log(result.docs)
+ // console.log(result.docs)
   if(result.empty){
    return res.send("You have no items")
   }
@@ -219,12 +219,13 @@ app.post('/api/additem',upload,async (req,res)=>{
 
 
 app.delete('/api/deleteitem',async (req,res)=>{
-const id = req.body
+const {id} = req.body
+console.log(id)
 try{
-await deleteDoc(doc(firestore,Product,id))
+await deleteDoc(doc(firestore,'Products',id))
 }catch(error){
   console.log(error)
-  res.send("Error deleting the item")
+  res.status(500).send("Error deleting the item")
 }
 res.send("ok")
 })
@@ -294,7 +295,7 @@ app.get('/api/getchats', async (req, res) => {
       id: doc.id,
       ...doc.data()
     })); 
-    console.log(chats)
+    //console.log(chats)
     res.json(chats);
   } catch (error) {
     console.error('Error fetching chats:', error);
@@ -304,8 +305,8 @@ app.get('/api/getchats', async (req, res) => {
 
 app.post('/api/getid',async (req,res)=>{ 
   const {username,reciever} = req.body
- console.log(username) 
- console.log(reciever) 
+ //console.log(username) 
+// console.log(reciever) 
  const id = createID(username,reciever)
  var docid
   try{
