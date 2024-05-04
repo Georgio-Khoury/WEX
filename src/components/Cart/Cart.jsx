@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
-import { API } from '../../../apiconfig';
+
 function Cart() {
+    const API = import.meta.env.VITE_REACT
     const [cart, setcart] = useState([]);
     useEffect(()=>{
         async function getcart(){

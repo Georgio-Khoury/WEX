@@ -2,8 +2,9 @@ import React,{useState,useEffect} from 'react'
 import Sidebar from '../NavBar/Sidebar'
 import { useNavigate } from 'react-router-dom';
 import './Product.css'
-import { API } from '../../apiconfig';
+
 function Product() {
+    const API = import.meta.env.VITE_REACT_API
   const [categ, setCateg] = useState(sessionStorage.getItem('categ'));
   const [items, setItems] = useState([]);
   const [noitem, setnoitem] = useState(false);

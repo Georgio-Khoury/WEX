@@ -2,8 +2,9 @@
 import { useEffect,useState, useRef } from 'react'
 import Chatbox from './Chatbox'
 import Sidebar from '../NavBar/Sidebar'
-import {API}  from '../../apiconfig.js'
+
 function ChatList() {
+  const API = import.meta.env.VITE_REACT_API
     var [chats,setchats] = useState([])
     const [username,setusername] = useState(sessionStorage.getItem("username"))
     useEffect( () => {

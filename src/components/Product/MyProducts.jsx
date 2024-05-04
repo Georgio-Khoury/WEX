@@ -1,8 +1,9 @@
 import React,{useEffect, useState} from 'react'
 import Sidebar from '../NavBar/Sidebar'
 import { useNavigate } from 'react-router-dom';
-import { API } from '../../apiconfig';
+
 function MyProducts() {
+  const API = import.meta.env.VITE_REACT_API
   const [items, setitems] = useState([]);
   const navigate = useNavigate()
   useEffect(()=>{

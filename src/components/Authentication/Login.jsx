@@ -1,13 +1,15 @@
 import  { useState } from 'react'
+
 import "./Login.css"
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { app } from '../../../firebaseConfig';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { API } from '../../apiconfig.js'
+
 
 function Login() {
-    
+    const API = import.meta.env.VITE_REACT_API
+    console.log(API)
     const navigate = useNavigate();
     const [errormsg,seterrormsg] = useState('')
     const [info, setInfo] = useState({

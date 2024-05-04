@@ -1,9 +1,10 @@
-import React , {useState} from 'react'
+import {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../NavBar/Sidebar';
-import { API } from '../../apiconfig';
+
 import './SellProduct.css'
 function SellProduct() {
+  const API = import.meta.env.VITE_REACT_API
     const categories = ['car', 'electronics', 'book',"accessories",'apartment','appliance','sports','pets','furniture','games']
       const initialFormData = {
         Title: "",

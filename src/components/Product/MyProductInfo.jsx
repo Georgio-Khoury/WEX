@@ -4,10 +4,10 @@ import Sidebar from '../NavBar/Sidebar'
 
 
 import './MyProductInfo.css'
-import { API } from '../../apiconfig';
+
 function MyProductInfo() {
   const [errormsg, seterrormsg] = useState();
-  
+  const API = import.meta.env.VITE_REACT_API
   var { item } = useParams(); // Get the serialized object from the URL parameter
   const decodedItem = decodeURIComponent(item); // Decode the URL parameter
   const itemObj = JSON.parse(decodedItem); // Parse the decoded string back into an object

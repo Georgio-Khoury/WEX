@@ -3,9 +3,9 @@ import "./Register.css";
 import { useNavigate } from 'react-router-dom';
 import { app } from '../../../firebaseConfig';
 import {getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { API } from '../../apiconfig.js';
-function Register() {
 
+function Register() {
+    const API = import.meta.env.VITE_REACT_API
     const initialFormData = {
         name: "",
         pfp:null,

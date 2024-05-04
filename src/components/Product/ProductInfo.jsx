@@ -3,7 +3,7 @@ import Sidebar from '../NavBar/Sidebar';
 import { useParams,useNavigate } from 'react-router-dom';
 import './ProductInfo.css'
 function ProductInfo() {
-    
+   
     var { item } = useParams(); // Get the serialized object from the URL parameter
     const decodedItem = decodeURIComponent(item); // Decode the URL parameter
     const itemObj = JSON.parse(decodedItem); // Parse the decoded string back into an object

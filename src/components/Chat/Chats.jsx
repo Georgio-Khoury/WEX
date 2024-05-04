@@ -3,9 +3,9 @@ import  { useState, useEffect,useRef } from 'react';
 import './Chats.css'
 import Message from './Message' 
 import EmojiPicker from 'emoji-picker-react';
-import { API } from '../../apiconfig';
-function Chats({ id, client, username }) {
 
+function Chats({ id, client, username }) {
+  const API = import.meta.env.VITE_REACT_API
  
   console.log(username)
   const [message, setMessage] = useState('');

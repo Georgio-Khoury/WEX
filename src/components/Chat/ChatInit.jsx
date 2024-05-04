@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
-import { API,WSO } from '../../apiconfig';
+
 import Chats from './Chats';
 import Sidebar from '../NavBar/Sidebar';
 
 function ChatInit() {
+  const API = import.meta.env.VITE_REACT_API
+ const WSO = import.meta.env.VITE_REACT_WS;
   const [id, setId] = useState('');
   const [client, setClient] = useState(null); // State to hold WebSocket client
   const[user,setusername] = useState('')
