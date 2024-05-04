@@ -114,7 +114,7 @@ function Chats({ id, client, username }) {
     }
   }, [messages]);
   return (
-    <div className="chat-container" onKeyDown={handlekeydown}>
+    <div className="chat-container">
       <div ref={messageContainerRef} className="message-container"  onKeyDown={handlekeydown}>
         {messages.map((msg, index) => (
         
