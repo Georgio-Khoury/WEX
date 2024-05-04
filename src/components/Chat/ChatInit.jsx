@@ -36,7 +36,8 @@ function ChatInit() {
 
           // Create WebSocket client with the fetched ID
           
-          const newClient = new W3CWebSocket(`ws://localhost:3002?chatID=${data.id}`);
+          //const newClient = new W3CWebSocket(`ws://localhost:3002?chatID=${data.id}`);
+          const newClient = new W3CWebSocket(`wss://websock-f60d.onrender.com?${data.id}`);
           setClient(newClient);
           console.log("WebSocket client created");
         } else {

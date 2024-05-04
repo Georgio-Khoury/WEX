@@ -6,8 +6,12 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:3001",
-        secure: false,
+        target: "https://wex-1.onrender.com/",
+
+        changeOrigin:true,
+        secure: true,
+          //  target: "http://localhost:3001",
+          //  secure:false,
       },
     },
   },
