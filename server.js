@@ -40,7 +40,9 @@ const storage = getStorage()
 //---------------------------------------------------------------
 app.get('/api/login/:email', async (req,res)=>{
   var email = req.params.email
+  if (email){
   email = email.toLowerCase()
+}else{res.json({error:"Invalid email"})}
   console.log(email)
   var doc = await getDocs(query(collection(firestore,"Users"),where('email','==',email)))
   var username = doc.docs[0].id
@@ -60,9 +62,11 @@ app.post('/api/adduser',upload, async (req, res) => {
   try {
    
     let { name,username, email, pn } = req.body;
-    console.log(username)
+    if(!username) res.json({"error":"Invalid input"})
     pn = parseInt(pn);
-    email = email.toLowerCase()
+    if (email){
+      email = email.toLowerCase()
+    }else{res.json({"error":"Invalid input"})}
 
     //checking if the document already exists(la2an usernames are unique)
     const userDocRef = doc(collection(firestore, 'Users'), username.toLowerCase());//points to the document with ID=username
@@ -105,6 +109,7 @@ app.post('/api/adduser',upload, async (req, res) => {
     await setDoc(doc(firestore, "Users",username.toLowerCase(),"Cart","0"),{
       item:""
     });
+    
     res.json({ id: username });
   } catch (error) {
     console.error('Error adding user to Firestore:', error);
@@ -233,6 +238,25 @@ res.send("ok")
 
 //-------------------------------------------------------------------------
 //cart management
+app.get('/api/cartstatus',async (req,res)=>{
+  const username = req.query.username
+  console.log("username is: ",username)
+  try{
+    const docref = collection(firestore,"Users",username,"Cart")
+    const cartitems = await getDocs(docref)
+  
+    const ids = cartitems.docs.map(doc=>{
+      console.log(doc.id)
+      if(doc.id!=0)
+      return doc.id
+    }).filter(id => id !== undefined);
+    return res.json({'ids':ids})
+  }catch(error){
+    console.log(error)
+    res.send(error)
+  }
+  })
+
 app.get('/api/getcart',async (req,res)=>{
   const username = req.query.username
   console.log("username is: ",username)
@@ -242,8 +266,9 @@ app.get('/api/getcart',async (req,res)=>{
   
     const ids = cartitems.docs.map(doc=>{
       console.log(doc.id)
+      if(doc.id!=0)
       return doc.id
-    })
+    }).filter(id => id !== undefined);
     console.log(ids)
     //then query every item by its id and return it
    
@@ -253,6 +278,7 @@ app.get('/api/getcart',async (req,res)=>{
              return item
       
   }));
+  
   const products = items.map(item=>item.data())
     res.json({"products":products})
   }catch(error){
@@ -269,7 +295,7 @@ app.post('/api/addcart',async (req,res)=>{
   //the id is the item's id
   try{
     await setDoc(doc(firestore,"Users",username,"Cart",id),{
-      item:id,
+      item:id, 
     })
   }catch(error){
     console.log(error)
@@ -278,6 +304,7 @@ app.post('/api/addcart',async (req,res)=>{
   res.send('ok')
 })
 app.delete('/api/deletecart',async (req,res)=>{
+  console.log('deleting')
   const {username,id} = req.body
   //id is the item's id
   try{
