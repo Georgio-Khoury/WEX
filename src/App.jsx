@@ -16,6 +16,7 @@ import MyProducts from './components/Product/MyProducts';
 
 import ProductInfo from './components/Product/ProductInfo';
 import MyProductInfo from './components/Product/MyProductInfo';
+import Cart from './components/Cart/Cart';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/myproducts" element={<MyProducts/>}/>
           <Route path="/myproductsinfo/:item" element={<MyProductInfo/>}/>
           <Route path="/productinfo/:item" element={<ProductInfo />} />
+          <Route path="/wishlist" Component={Cart}></Route>
                       {/* <Route path="/test" element={<Test />} /> */}
         </Routes>
         

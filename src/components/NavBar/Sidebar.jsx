@@ -93,6 +93,9 @@ function Sidebar() {
                     <Link to="/myproducts">My Items</Link>
                 </li>
                 <li className="navbar-item">
+                    <Link to="/wishlist">WishList</Link>
+                </li>
+                <li className="navbar-item">
                     <Link to="/myaccount">My Account</Link>
                 </li>
                 <li className="navbar-item" onClick={logoutpop}>

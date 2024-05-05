@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Sidebar from '../NavBar/Sidebar'
 import { useNavigate } from 'react-router-dom';
 import './Product.css'
-
+import CartButton from '../Cart/CartButton';
 function Product() {
     const API = import.meta.env.VITE_REACT_API
   const [categ, setCateg] = useState(sessionStorage.getItem('categ'));
@@ -12,15 +12,24 @@ function Product() {
   const navigate = useNavigate()
   console.log('categ is',categ)
   useEffect(() => {
+    async function d(){
       if (categ) {
-          getdata();
+        await checkstatus()
+          await getdata(); 
+         
       }
+    }
+    d()
   }, [categ]);
   useEffect(() => {
-    console.log(categ)
-    if (categ) {
-        getdata();
-    }
+    async function d(){
+        if (categ) {
+            await checkstatus()
+            await getdata(); 
+          
+        }
+      }
+      d()
 }, []);
   async function getdata() {
     const response = await fetch(`${API}/getitems?categ=${categ}`, {
@@ -40,9 +49,21 @@ function Product() {
         setItems([])
         
     }
-
-
 }
+
+    async function checkstatus(){
+        const response = await fetch(`${API}/cartstatus?username=${sessionStorage.getItem('username')}`);
+        if (response.ok) {
+            const data = await response.json();
+            data.ids.map(id=>{
+                sessionStorage.setItem(`${id}`,true)
+            })
+        }
+    
+    }
+
+
+
   return (
     <div className='page-container'>
 <Sidebar/>
@@ -65,6 +86,9 @@ function Product() {
                         <img src={item.image} alt="Product" />
                         <h1>{item.Title}</h1>
                         <p>{item.price}</p>
+                        <div className='wishlist-button'>
+                        <CartButton id={item.id} status={sessionStorage.getItem(item.id)=='true'?true:false}/>
+                        </div>
                     </div>
 )})}
             </div>
