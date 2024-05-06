@@ -6,8 +6,9 @@ const requireAuth = (req, res, next) => {
         console.log('no token')
       return res.status(401).json({ error: "Unauthorized" });
     }
+    const tokenWithoutBearer = token.replace('Bearer ', '');
   
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+    jwt.verify(tokenWithoutBearer, process.env.SECRET_KEY, (err, decoded) => {
       if (err) {
         console.log('verify failed')
         
