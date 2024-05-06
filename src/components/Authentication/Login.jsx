@@ -39,7 +39,7 @@ function Login() {
           sessionStorage.setItem("email",data.email)
           sessionStorage.setItem('categ','')
           console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'),sessionStorage.getItem('email'))
-          Cookies.set('jwtToken', data.token, { expires: 1, sameSite: 'strict' });
+          Cookies.set('jwtToken', data.token, { expires: 1, sameSite: 'strict',domain: 'https://wex-1.onrender.com'});
         }
     
     
