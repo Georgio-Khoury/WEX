@@ -8,7 +8,7 @@ const Logout = () => {
 
     const confirmLogout = () => {
         sessionStorage.clear();
-        Cookies.remove('jwtToken')
+        Cookies.remove('jwtToken', { domain: 'wex-1.onrender.com', secure: true })
         navigate('/');
     };
 
