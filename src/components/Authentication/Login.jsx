@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 import { app } from '../../../firebaseConfig';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Cookies from 'js-cookie'
-
+import { useLogin } from '../../hooks/useLogin';
 function Login() {
+    const {login} = useLogin()
     const API = import.meta.env.VITE_REACT_API
     console.log(API)
     const navigate = useNavigate();
@@ -41,7 +42,7 @@ function Login() {
           sessionStorage.setItem('jwtToken',data.token)
           console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'),sessionStorage.getItem('email'))
           
-       
+         login(data.username)
          
         }
     
@@ -60,6 +61,7 @@ function Login() {
             seterrormsg("invalid credentials")
             console.log('inv creds',error);
         }
+       
     }
 
     return (

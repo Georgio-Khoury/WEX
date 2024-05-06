@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Logout.css";
+import { useLogout } from '../../hooks/useLogout';
 import Cookies from 'js-cookie'
 const Logout = () => {
+    const {logout} = useLogout()
     const navigate = useNavigate();
     const [showConfirm, setShowConfirm] = useState(true); // Set to true for demonstration
 
     const confirmLogout = () => {
         sessionStorage.clear();
-        Cookies.remove('jwtToken', { domain: 'wex-1.onrender.com', secure: true })
+        logout()
         navigate('/');
     };
 
