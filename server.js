@@ -172,7 +172,7 @@ app.get('/api/getitems',requireAuth,async (req,res)=>{
   const Products = collection(firestore,'Products')
   const q = query(Products,where('category','==',categ))
   const result = await getDocs(q)
- console.log(result.docs.length)
+
   if(result.empty) {
       return res.status(404).json({ error: `No items in category ${categ} are found` });
     } 
