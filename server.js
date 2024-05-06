@@ -56,7 +56,7 @@ app.get('/api/login/:email', async (req,res)=>{
   var email = doc.docs[0].data().email
   var pn = doc.docs[0].data().pn
   console.log(username);
-  
+  console.log('secret key is', process.env.SECRET_KEY)
   const token = jwt.sign({ username, email }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
   res.json({"username":username,"name":name,"pfp":pfp,"pn":pn,"email":email,"token":token})
