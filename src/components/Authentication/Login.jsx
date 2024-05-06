@@ -28,7 +28,7 @@ function Login() {
         const email= info.email
          const response = await fetch(`${API}/login/${email}`,{
             method:'GET',
-            credentials:'include'
+            
          })
           const data =  await response.json()
           console.log(data)
