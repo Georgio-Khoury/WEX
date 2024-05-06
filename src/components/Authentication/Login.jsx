@@ -42,7 +42,8 @@ function Login() {
           
           // for the hsoted website:
         
-          Cookies.set('jwtToken', data.token, { expires: 1, sameSite: 'None',secure:true,domain:'wex-1.onrender.com'});
+          Cookies.set('jwtToken', data.token, { expires: 1, sameSite: 'None',secure:true,domain:'wex-frontend.onrender.com'});
+          
           console.log('cookies set')
           
           //for local testing:
