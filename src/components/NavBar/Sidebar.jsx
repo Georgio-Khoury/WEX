@@ -1,11 +1,11 @@
 import React, { useState,useEffect, useRef } from 'react'
 import './Sidebar.css'
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {onSnapshot,getFirestore,collection,query,where,getDocs} from 'firebase/firestore'
 import Logout from '../Authentication/Logout';
 function Sidebar() {
-    
+    const navigate = useNavigate()
     const [logout,setlogout] = useState(false)
     const [newMessage, setnewMessage] = useState(false);
     var first = true
@@ -78,24 +78,24 @@ function Sidebar() {
                 <img src={sessionStorage.getItem("pfp")} alt="Profile" />
             </div>
             <ul className="navbar-list">
-                <li className="navbar-item">
+                <li className="navbar-item"  onClick={()=>navigate('/product')}>
                     <Link to="/product">Buying</Link>
                 </li>
-                <li className="navbar-item">
+                <li className="navbar-item" onClick={()=>navigate('/sellproduct')}>
                     <Link to="/sellproduct">Selling</Link>
                 </li>
-                <li className={`navbar-item ${newMessage ? 'new-message' : ''}`}>
+                <li className={`navbar-item ${newMessage ? 'new-message' : ''}`} onClick={()=>navigate('/inbox')}>
                     <Link to="/inbox">
                         Chat {newMessage && <span className="new-message-label">New</span>}
                     </Link>
                 </li>
-                <li className="navbar-item">
+                <li className="navbar-item" onClick={()=>navigate('/myproducts')} >
                     <Link to="/myproducts">My Items</Link>
                 </li>
-                <li className="navbar-item">
+                <li className="navbar-item" onClick={()=>navigate('/wishlist')}>
                     <Link to="/wishlist">WishList</Link>
                 </li>
-                <li className="navbar-item">
+                <li className="navbar-item" onClick={()=>navigate('/myaccount')}>
                     <Link to="/myaccount">My Account</Link>
                 </li>
                 <li className="navbar-item" onClick={logoutpop}>
