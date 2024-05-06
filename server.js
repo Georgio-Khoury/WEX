@@ -48,17 +48,16 @@ app.get('/api/login/:email', async (req,res)=>{
   if (email){
   email = email.toLowerCase()
 }else{res.json({error:"Invalid email"})}
-  console.log(email)
+ 
   var doc = await getDocs(query(collection(firestore,"Users"),where('email','==',email)))
   var username = doc.docs[0].id
   var name = doc.docs[0].data().name
   var pfp = doc.docs[0].data().profilepic
   var email = doc.docs[0].data().email
   var pn = doc.docs[0].data().pn
-  console.log(username);
-  console.log('secret key is', process.env.SECRET_KEY)
+  
   const token = jwt.sign({ username, email }, process.env.SECRET_KEY, { expiresIn: '1h' });
-
+console.log('login successful')
   res.json({"username":username,"name":name,"pfp":pfp,"pn":pn,"email":email,"token":token})
 })
  
@@ -257,7 +256,7 @@ app.get('/api/cartstatus',requireAuth,async (req,res)=>{
   })
 
 app.get('/api/getcart',requireAuth,async (req,res)=>{
-  req.user.username
+  const username = req.user.username
   //const username = req.query.username
   console.log("username is: ",username)
   try{
