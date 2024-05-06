@@ -14,7 +14,7 @@ import ForgotPassword from './components/Authentication/ForgotPassword';
 import ChatInit from './components/Chat/ChatInit'
 function App() {
   const { user } = useAuthContext();
-  
+  console.log(user)
   return (
     <BrowserRouter>
       <Routes>
