@@ -92,22 +92,22 @@ function Register() {
                 <input onChange={handleChange}  type="file" accept="image/*" placeholder='profile pic' id="pfp" name="pfp" />
 
                 <label htmlFor="name">Full name</label>
-                <input onChange={handleChange} value={info.name} type="text" placeholder='full name' id="name" name="name" />
+                <input onChange={handleChange} required value={info.name} type="text" placeholder='full name' id="name" name="name" />
                
                 <label htmlFor="phone number">Phone Number</label>
-                <input onChange={handleChange} value={info.pn} type="text" placeholder='phone number' id="phone number" name="pn" />
+                <input onChange={handleChange} required value={info.pn} type="text" placeholder='phone number' id="phone number" name="pn" />
                
                 <label htmlFor="username">Username</label>
-                <input onChange={handleChange} value={info.username} type="text" placeholder='username' id="username" name="username" />
+                <input onChange={handleChange} required value={info.username} type="text" placeholder='username' id="username" name="username" />
                 
                 <label htmlFor="email">Email</label>
-                <input onChange={handleChange} value={info.email} type="email" placeholder='youremail@...com' id="email" name="email" />
+                <input onChange={handleChange} required value={info.email} type="email" placeholder='youremail@...com' id="email" name="email" />
                 
                 <label htmlFor="password">Password</label>
-                <input onChange={handleChange} value={info.password} type="password" placeholder="**************" id="password" name="password" />
+                <input onChange={handleChange} required value={info.password} type="password" placeholder="**************" id="password" name="password" />
                 
                 <label htmlFor="confirmPassword">Confirm Password</label>
-                <input onChange={handleChange} value={info.confirmPassword} type="password" placeholder="**************" id="confirmPassword" name="confirmPassword" />
+                <input onChange={handleChange} required value={info.confirmPassword} type="password" placeholder="**************" id="confirmPassword" name="confirmPassword" />
                 
                 <button type="submit" className="register-btn">Register</button>
                 <button className="login-btn" onClick={() => navigate('/')}>Already have an account? Login here.</button>
