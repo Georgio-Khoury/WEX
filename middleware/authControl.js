@@ -9,7 +9,7 @@ const requireAuth = (req, res, next) => {
   
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
       if (err) {
-        console.log('verify failed')
+        console.log('verify failed ')
         
         return res.status(401).json({ error: "Invalid token" });
       }
