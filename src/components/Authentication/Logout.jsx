@@ -10,7 +10,7 @@ const Logout = () => {
 
     const confirmLogout = () => {
         sessionStorage.clear();
-        logout()
+       // logout()
         navigate('/');
     };
 

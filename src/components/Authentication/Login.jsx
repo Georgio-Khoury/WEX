@@ -42,7 +42,7 @@ function Login() {
           sessionStorage.setItem('jwtToken',data.token)
           console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'),sessionStorage.getItem('email'))
           
-         login(data.username)
+         //login(data.username)
          
         }
     
