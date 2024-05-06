@@ -2,7 +2,7 @@ const {getStorage,ref,uploadBytes, uploadBytesResumable,getDownloadURL} = requir
 
 async function uploadImage(file, quantity,location) {
     const storageFB = getStorage();
-    console.log('ana hon')
+    console.log('image taken')
     
     if (quantity === 'single') {
         const dateTime = Date.now();
@@ -42,7 +42,9 @@ async function uploadImage(file, quantity,location) {
 
 
 const uploadSingleImage = async (req, res,location) => {
-  
+  if(!req.file){
+    return "https://firebasestorage.googleapis.com/v0/b/projectfirebase-462ec.appspot.com/o/pfp%2Fblank-profile-picture-973460_960_720.webp?alt=media&token=a41836e7-f3c2-4946-a625-2a6a6217c36f"
+  }
     const file = {
       type: req.file.mimetype,
       buffer: req.file.buffer,
