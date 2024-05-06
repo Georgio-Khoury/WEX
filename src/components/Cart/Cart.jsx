@@ -10,7 +10,9 @@ function Cart() {
         async function getcart(){
             const response = await fetch(`${API}/getcart?username=${sessionStorage.getItem('username')}`,{
                 method:'GET',
-                credentials:'include',
+               headers:{
+                'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`
+               }
             })
             console.log('here')
             const data = await response.json()

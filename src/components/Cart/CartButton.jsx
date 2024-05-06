@@ -28,8 +28,9 @@ useEffect(() => {
         const response = await fetch(`${API}/${route}`,{
           method:m,
           headers:{
-            'Content-Type':'application/json'},
-            credentials:'include',
+            'Content-Type':'application/json',
+            'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`},
+         
           body:JSON.stringify({username,id})
         })
         const data = await response.text()

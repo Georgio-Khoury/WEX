@@ -13,7 +13,9 @@ function ChatList() {
             
             const response = await fetch(`${API}/getchats?username=${username}`,{
               method:'GET',
-              credentials:'include'
+             headers:{
+              'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`
+             }
             })
             const data = await response.json();
             if(response.ok){

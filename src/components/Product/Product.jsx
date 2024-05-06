@@ -36,6 +36,7 @@ function Product() {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`
         },
         credentials:'include'
     });
@@ -55,7 +56,9 @@ function Product() {
     async function checkstatus(){
         const response = await fetch(`${API}/cartstatus?username=${sessionStorage.getItem('username')}`,{
           method:'GET',
-          credentials:'include'
+          headers:{
+            'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`
+          }
         });
         if (response.ok) {
             const data = await response.json();

@@ -26,6 +26,7 @@ async function deleteitem(){
     method:'DELETE',
     headers: {
       'Content-Type': 'application/json', // Specify content type as JSON
+      'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`
     },
     credentials:'include',
     body: JSON.stringify({id})
@@ -46,6 +47,7 @@ async function deleteitem(){
       method:'POST',
       headers: {
         'Content-Type': 'application/json', // Specify content type as JSON
+        'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`
       },
       body: JSON.stringify({id,info})
     })

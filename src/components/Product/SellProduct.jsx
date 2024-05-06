@@ -48,7 +48,9 @@ function SellProduct() {
         try{
         const response = await fetch(`${API}/additem`,{
             method: 'POST',
-            credentials:'include',
+            headers:{
+              'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`
+            },
             body: formdata
         })
         const data = await response.json()

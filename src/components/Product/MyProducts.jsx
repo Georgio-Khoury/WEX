@@ -10,7 +10,9 @@ function MyProducts() {
     async function myitems(){
       const response = await fetch(`${API}/myitems?username=${sessionStorage.getItem('username')}`,{
         method:'GET',
-        credentials:'include'
+        headers:{
+          'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`
+        }
       
       })
       const data =await  response.json()

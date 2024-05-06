@@ -27,7 +27,9 @@ function Chats({ id, client, username }) {
       try {
         const response = await fetch(`${API}/getmessages?chatid=${id}`,{
           method:'GET',
-          credentials:'include'
+          headers:{
+            'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`
+          }
         
         });
         if (response.ok) {

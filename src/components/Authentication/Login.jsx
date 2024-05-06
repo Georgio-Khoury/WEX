@@ -38,16 +38,10 @@ function Login() {
           sessionStorage.setItem("pn",data.pn)
           sessionStorage.setItem("email",data.email)
           sessionStorage.setItem('categ','')
+          sessionStorage.setItem('jwtToken',data.token)
           console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'),sessionStorage.getItem('email'))
           
-          // for the hsoted website:
-        
-          Cookies.set('jwtToken', data.token, { expires: 1, sameSite: 'None',secure:true,domain:'wex-frontend.onrender.com'});
-          
-          console.log('cookies set')
-          
-          //for local testing:
-          //Cookies.set('jwtToken', data.token, { expires: 1, sameSite: 'strict'});  
+       
          
         }
     
