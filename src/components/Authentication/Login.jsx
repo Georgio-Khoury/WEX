@@ -41,12 +41,10 @@ function Login() {
           console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'),sessionStorage.getItem('email'))
           
           // for the hsoted website:
-          try{
+        
           Cookies.set('jwtToken', data.token, { expires: 1, sameSite: 'None',secure:true,domain:'wex-1.onrender.com'});
           console.log('cookies set')
-          }catch(error){
-            console.log(error)
-          }
+          
           //for local testing:
           //Cookies.set('jwtToken', data.token, { expires: 1, sameSite: 'strict'});  
          
