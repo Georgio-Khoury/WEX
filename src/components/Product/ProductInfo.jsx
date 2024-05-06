@@ -24,6 +24,7 @@ function ProductInfo() {
         var username = sessionStorage.getItem('username')
           const response = await fetch(`${API}/${route}`,{
             method:m,
+            credentials:'include',
             headers:{
               'Content-Type':'application/json'},
             body:JSON.stringify({username,id})

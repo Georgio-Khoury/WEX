@@ -8,7 +8,11 @@ function MyProducts() {
   const navigate = useNavigate()
   useEffect(()=>{
     async function myitems(){
-      const response = await fetch(`${API}/myitems?username=${sessionStorage.getItem('username')}`)
+      const response = await fetch(`${API}/myitems?username=${sessionStorage.getItem('username')}`,{
+        method:'GET',
+        credentials:'include'
+      
+      })
       const data =await  response.json()
       if(response.ok){
         setitems(data.products)

@@ -48,7 +48,7 @@ function SellProduct() {
         try{
         const response = await fetch(`${API}/additem`,{
             method: 'POST',
-            
+            credentials:'include',
             body: formdata
         })
         const data = await response.json()

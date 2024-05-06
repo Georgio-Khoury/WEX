@@ -29,6 +29,7 @@ useEffect(() => {
           method:m,
           headers:{
             'Content-Type':'application/json'},
+            credentials:'include',
           body:JSON.stringify({username,id})
         })
         const data = await response.text()

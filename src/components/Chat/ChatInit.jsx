@@ -29,6 +29,7 @@ function ChatInit() {
           headers: {
             'Content-Type': 'application/json'
           }, 
+          credentials:'include',
           body: JSON.stringify({ username, reciever })
         });
         const data = await response.json();

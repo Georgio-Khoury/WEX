@@ -37,6 +37,7 @@ function Product() {
         headers: {
             'Content-Type': 'application/json',
         },
+        credentials:'include'
     });
 
     if (response.ok) {
@@ -52,7 +53,10 @@ function Product() {
 }
 
     async function checkstatus(){
-        const response = await fetch(`${API}/cartstatus?username=${sessionStorage.getItem('username')}`);
+        const response = await fetch(`${API}/cartstatus?username=${sessionStorage.getItem('username')}`,{
+          method:'GET',
+          credentials:'include'
+        });
         if (response.ok) {
             const data = await response.json();
             data.ids.map(id=>{

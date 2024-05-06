@@ -55,7 +55,7 @@ function Register() {
         try{
         const response = await fetch(`${API}/adduser`,{
             method: 'POST',
-            
+            credentials:'include',
             body: formdata
         })
         const data = await response.json()

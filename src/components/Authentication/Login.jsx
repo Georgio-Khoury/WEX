@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { app } from '../../../firebaseConfig';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
+import Cookies from 'js-cookie'
 
 function Login() {
     const API = import.meta.env.VITE_REACT_API
@@ -26,7 +26,10 @@ function Login() {
 
     async function informbackend(){
         const email= info.email
-         const response = await fetch(`${API}/login/${email}`)
+         const response = await fetch(`${API}/login/${email}`,{
+            method:'GET',
+            credentials:'include'
+         })
           const data =  await response.json()
           console.log(data)
           sessionStorage.setItem('username',data.username)
@@ -36,7 +39,7 @@ function Login() {
           sessionStorage.setItem("email",data.email)
           sessionStorage.setItem('categ','')
           console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'),sessionStorage.getItem('email'))
-          
+          Cookies.set('jwtToken', data.token, { expires: 1, sameSite: 'strict' });
         }
     
     

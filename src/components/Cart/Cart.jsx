@@ -8,7 +8,10 @@ function Cart() {
     const [noitem, setnoitem] = useState();
     useEffect(()=>{
         async function getcart(){
-            const response = await fetch(`${API}/getcart?username=${sessionStorage.getItem('username')}`)
+            const response = await fetch(`${API}/getcart?username=${sessionStorage.getItem('username')}`,{
+                method:'GET',
+                credentials:'include',
+            })
             console.log('here')
             const data = await response.json()
             if(response.ok){

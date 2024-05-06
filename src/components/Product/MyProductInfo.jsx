@@ -27,7 +27,9 @@ async function deleteitem(){
     headers: {
       'Content-Type': 'application/json', // Specify content type as JSON
     },
+    credentials:'include',
     body: JSON.stringify({id})
+   
   })
   if(response.ok){
     navigate('/myproducts')

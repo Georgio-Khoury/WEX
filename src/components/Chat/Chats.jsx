@@ -25,7 +25,11 @@ function Chats({ id, client, username }) {
   useEffect(() => {
     async function getMessages() {
       try {
-        const response = await fetch(`${API}/getmessages?chatid=${id}`);
+        const response = await fetch(`${API}/getmessages?chatid=${id}`,{
+          method:'GET',
+          credentials:'include'
+        
+        });
         if (response.ok) {
           const data = await response.json();
           console.log(data)

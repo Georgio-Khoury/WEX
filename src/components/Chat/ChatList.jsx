@@ -11,7 +11,10 @@ function ChatList() {
         
         const getchats= async ()=>{
             
-            const response = await fetch(`${API}/getchats?username=${username}`)
+            const response = await fetch(`${API}/getchats?username=${username}`,{
+              method:'GET',
+              credentials:'include'
+            })
             const data = await response.json();
             if(response.ok){
              var ch=   data.map(chat=>({
@@ -22,7 +25,7 @@ function ChatList() {
             }
         }
         getchats();
-    },[])
+    },[])  
      
   return (
     
