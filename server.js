@@ -123,7 +123,25 @@ app.post('/api/adduser',upload, async (req, res) => {
 });
 
 
-
+app.post('/api/edituser',requireAuth,async(req,res)=>{
+  try {
+    const { name,pn } = req.body;
+    const userDocRef = doc(collection(firestore, 'Users'), req.user.username.toLowerCase());
+    const docSnapshot = await getDoc(userDocRef);
+    if (!docSnapshot.exists()) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    await updateDoc(userDocRef, {
+      name,
+     
+      pn
+    });
+    res.json({ message: 'User updated successfully' });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
+})
 //------------------------------------------------
 // items management 
 app.post('/api/edititem',requireAuth,async (req,res)=>{
@@ -320,24 +338,50 @@ app.delete('/api/deletecart',requireAuth,async (req,res)=>{
 //chatting and messages
 
 
-app.get('/api/getchats',requireAuth, async (req, res) => {
-  //const username = req.query.username
-  const username = req.user.username
-  console.log(username)
-  try { 
+app.get('/api/getchats', requireAuth, async (req, res) => {
+  const username = req.user.username;
+  console.log(username);
+  try {
     // Fetch chats from Firestore
-    const chatsSnapshot = await getDocs(query(collection(firestore, 'Chats'),where("Participants","array-contains",username)));
-    const chats = chatsSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    })); 
-    //console.log(chats)
+    const chatsSnapshot = await getDocs(query(collection(firestore, 'Chats'), where("Participants", "array-contains", username)));
+    const chats = [];
+
+    // Iterate through each chat
+    for (const docz of chatsSnapshot.docs) {
+      const chatData = docz.data();
+      const participants = chatData.Participants;
+      console.log('parts ',participants)
+      // Find the participant other than the current user
+      var otherParticipant = participants.find(participant => participant !== username);
+      console.log('other part: ',otherParticipant)
+      
+      // Fetch the profile pic of the other participant from Users collection
+      var userDoc=null
+      if(otherParticipant!=null){
+      var docref = doc(firestore, 'Users', otherParticipant)
+       userDoc = await getDoc(docref);
+      }
+
+      const pfp = userDoc ? userDoc.data().profilepic : null;
+
+      // Construct chat object with pfp of other participant
+      const chat = {
+        id: docz.id,
+        participants: participants,
+        pfp: pfp,
+        ...chatData
+      };
+      chats.push(chat);
+    }
+
+    console.log(chats);
     res.json(chats);
   } catch (error) {
     console.error('Error fetching chats:', error);
     res.status(500).json({ error: 'Failed to fetch chats' });
   }
-});     
+});
+
 
 app.post('/api/getid',requireAuth,async (req,res)=>{ 
   const username = req.user.username
