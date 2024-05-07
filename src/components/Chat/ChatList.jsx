@@ -21,7 +21,8 @@ function ChatList() {
             if(response.ok){
              var ch=   data.map(chat=>({
                     id : chat.id,
-                    participants : chat.Participants
+                    participants : chat.Participants,
+                    pfp: chat.pfp?chat.pfp:sessionStorage.getItem('pfp')
                 }))
                 setchats(ch)   
             }
@@ -36,7 +37,7 @@ function ChatList() {
         <div className='content'>
         {chats.map(chat=>{
               
-              return <Chatbox key={chat.id} participants={chat.participants} id={chat.id} sender={username}/>
+              return <Chatbox key={chat.id} participants={chat.participants} id={chat.id} sender={username} pfp={chat.pfp}/>
               
            })}
           </div>

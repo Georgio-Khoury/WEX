@@ -4,7 +4,7 @@
 import { useEffect,useState } from 'react';
 import './Chatbox.css'
 import { useNavigate } from 'react-router-dom';
-function Chatbox({ id, participants,sender }) {
+function Chatbox({ id, participants,sender,pfp }) {
   const [receiver, setreceiver] = useState('');
   const navigate = useNavigate()
   function assignReceiver(sender, participants) {
@@ -33,6 +33,7 @@ function Chatbox({ id, participants,sender }) {
     <div className="chatbox" onClick={enterchat}>
       <div className="chat-info">Chat ID: {id}</div>
       <div className="participant-info">Participant: {receiver}</div>
+      <img src={pfp} className='account-profile-pic'/>
     </div>
   );
 }

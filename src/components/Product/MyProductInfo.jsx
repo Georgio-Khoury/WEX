@@ -4,7 +4,7 @@ import Sidebar from '../NavBar/Sidebar'
 
 
 import './MyProductInfo.css'
-
+ 
 function MyProductInfo() {
   const [errormsg, seterrormsg] = useState();
   const API = import.meta.env.VITE_REACT_API
