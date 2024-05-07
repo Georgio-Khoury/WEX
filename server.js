@@ -292,11 +292,13 @@ app.get('/api/getcart',requireAuth,async (req,res)=>{
 
     const items = await Promise.all(ids.map(async (id) => {
       const item = await getDoc(doc(firestore, "Products", id));
+      console.log(item.data())
              return item
       
   }));
   
-  const products = items.map(item=>item.data())
+  const products = items.map(item=>item.data()).filter(product=>product!== undefined)
+  console.log(products)
     res.json({"products":products})
   }catch(error){
     console.log(error)
