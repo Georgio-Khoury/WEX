@@ -2,15 +2,16 @@
 import { useEffect,useState, useRef } from 'react'
 import Chatbox from './Chatbox'
 import Sidebar from '../NavBar/Sidebar'
-
+import Spinner from '../../Spinner/Spinner'
 function ChatList() {
   const API = import.meta.env.VITE_REACT_API
+  const [loading, setloading] = useState(false)
     var [chats,setchats] = useState([])
     const [username,setusername] = useState(sessionStorage.getItem("username"))
     useEffect( () => {
         
         const getchats= async ()=>{
-            
+            setloading(true)
             const response = await fetch(`${API}/getchats?username=${username}`,{
               method:'GET',
              headers:{
@@ -26,6 +27,7 @@ function ChatList() {
                 }))
                 setchats(ch)   
             }
+            setloading(false)
         }
         getchats();
     },[])  
@@ -34,7 +36,9 @@ function ChatList() {
     
     <div className='page-container'>
     <Sidebar/>
+   
         <div className='content'>
+        {loading&&<Spinner/>}
         {chats.map(chat=>{
               
               return <Chatbox key={chat.id} participants={chat.participants} id={chat.id} sender={username} pfp={chat.pfp}/>

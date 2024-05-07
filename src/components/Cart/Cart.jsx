@@ -1,13 +1,16 @@
 import React, { useEffect,useState } from 'react'
 import Sidebar from '../NavBar/Sidebar';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../../Spinner/Spinner';
 function Cart() {
     const API = import.meta.env.VITE_REACT_API
     const navigate = useNavigate()
+    const [loading, setloading] = useState(false);
     const [cart, setcart] = useState([]);
     const [noitem, setnoitem] = useState();
     useEffect(()=>{
         async function getcart(){
+            setloading(true)
             const response = await fetch(`${API}/getcart?username=${sessionStorage.getItem('username')}`,{
                 method:'GET',
                headers:{
@@ -27,6 +30,7 @@ function Cart() {
             }else{
                 console.log('no cart data')
             }
+            setloading(false)
         }
         getcart()
         console.log(cart)
@@ -35,6 +39,7 @@ function Cart() {
     <div className='page-container'>
     <Sidebar/>
     <div className='content'>
+        {loading&&<Spinner/>}
     <div className="items-container">
             {noitem&& <h1>No item available</h1>}
                 {cart.map((item, index) => {

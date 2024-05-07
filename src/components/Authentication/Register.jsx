@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./Register.css";
+import Spinner from '../../Spinner/Spinner';
 import { useNavigate } from 'react-router-dom';
 import { app } from '../../../firebaseConfig';
 import {getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
@@ -18,6 +19,7 @@ function Register() {
     const navigate = useNavigate();
     const [info, setInfo] = useState(initialFormData)
     const[errormsg,seterrormsg] = useState('')
+    const [loading, setloading] = useState(false);
     function handleChange(event) {
         const { name, value } = event.target;
         const newValue = name === 'pfp' ? event.target.files[0] : value;
@@ -32,10 +34,12 @@ function Register() {
 
     async function handleSubmit(event) {
         event.preventDefault()
+        setloading(true)
         const { password, confirmPassword } = info;
         if (password !== confirmPassword) {
             //alert("Passwords do not match. Please try again.")
             seterrormsg("Passwords don't match")
+            setloading(false)
             return;
         }  
        
@@ -65,9 +69,11 @@ function Register() {
         if(!response.ok){
            
             seterrormsg(data.error)
+            setloading(false)
             return;
         }
     }catch(error){
+        setloading(false)
         console.log(error)
         return;
     }
@@ -75,10 +81,10 @@ function Register() {
     const auth =  getAuth()
     try{
     const reg = await createUserWithEmailAndPassword(auth,info.email,info.password)
-    
+        setloading(false)
         navigate('/')
     }catch(error){
-        
+        setloading(false)
         seterrormsg(error)
         return;
     }
@@ -87,6 +93,7 @@ function Register() {
     return (
         <div className="register-container">
             <h2>Register</h2>
+            {loading && <Spinner />}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="pfp">Profile Picture</label>
                 <input onChange={handleChange}  type="file" accept="image/*" placeholder='profile pic' id="pfp" name="pfp" />

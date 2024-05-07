@@ -1,5 +1,5 @@
 import  { useState } from 'react'
-
+import Spinner from '../../Spinner/Spinner';
 import "./Login.css"
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 import { useLogin } from '../../hooks/useLogin';
 function Login() {
     const {login} = useLogin()
+    const [loading, setloading] = useState(false);
     const API = import.meta.env.VITE_REACT_API
     console.log(API)
     const navigate = useNavigate();
@@ -49,16 +50,18 @@ function Login() {
     
     async function handleSubmit(event) {
         event.preventDefault();
-         
+         setloading(true)
         const auth = getAuth();
         try {
             const userCredential = await signInWithEmailAndPassword(auth, info.email, info.password);
             seterrormsg('')
             await informbackend()
+            setloading(false)
             navigate('/product');
             console.log(userCredential)
         } catch (error) {
             seterrormsg("invalid credentials")
+            setloading(false)
             console.log('inv creds',error);
         }
        
@@ -67,6 +70,7 @@ function Login() {
     return (
         <div className="login-container">
             <h2>
+                {loading&&<Spinner/>}
                 Login
             </h2>
             <form onSubmit={handleSubmit}>

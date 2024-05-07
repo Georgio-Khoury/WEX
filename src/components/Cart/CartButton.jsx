@@ -24,6 +24,7 @@ useEffect(() => {
     }
      
     async function managecart(route,m){
+
       var username = sessionStorage.getItem('username')
         const response = await fetch(`${API}/${route}`,{
           method:m,

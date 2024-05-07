@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../NavBar/Sidebar';
-
+import Spinner from '../../Spinner/Spinner'
 import './SellProduct.css'
 function SellProduct() {
   const API = import.meta.env.VITE_REACT_API
@@ -16,6 +16,7 @@ function SellProduct() {
     const navigate = useNavigate();
     const [info, setInfo] = useState(initialFormData)
     const[errormsg,seterrormsg] = useState('')
+    const [loading, setLoading] = useState(false);
     function handleChange(event) {
         const { name, value } = event.target;
         const newValue = name === 'image' ? event.target.files[0] : value;
@@ -30,7 +31,7 @@ function SellProduct() {
 
       async function handleSubmit(event) {
         event.preventDefault() 
-    
+        setLoading(true);
         console.log(info)
         var Title = info.Title
         var image = info.image
@@ -58,10 +59,12 @@ function SellProduct() {
         if(!response.ok){
            
             seterrormsg(data.error)
+            setLoading(false)
             return;
         }
     }catch(error){
         console.log(error)
+        setLoading(false)
         return;
     }
     console.log('meshe l7al')
@@ -72,6 +75,7 @@ function SellProduct() {
     <div className="page-container">
       <Sidebar/>
       <div className='content'>
+      {loading && <Spinner />}
     <div className="register-container">
     <h2>Sell Item</h2>
     <form onSubmit={handleSubmit}>
