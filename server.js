@@ -185,6 +185,9 @@ app.get('/api/getitems',requireAuth,async (req,res)=>{
   //first we get the category of the item selected from the frontend(the frontend inserts the category in the request api link)
  
   const categ = req.query.categ
+  if(!categ){
+    res.json({"error":"Invalid category"})
+  }
   //res.json({message: `${categ} is being sent to the server`})
   const Products = collection(firestore,'Products')
   const q = query(Products,where('category','==',categ))
@@ -429,13 +432,13 @@ app.get('/api/getmessages',requireAuth, async (req, res) => {
   try {
     // Query messages from Firestore
     const messagesSnapshot = await getDocs(query(collection(firestore, `Chats/${chatId}/Messages`),orderBy('timestamp')));
-    
+   
     const messages = messagesSnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
     }));
     console.log('ok')
-    
+   
     res.json(messages);
   } catch (error) {
     console.error('Error fetching messages:', error);
