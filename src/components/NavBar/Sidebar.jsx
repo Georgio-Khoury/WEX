@@ -8,7 +8,28 @@ function Sidebar() {
     const navigate = useNavigate()
     const [logout,setlogout] = useState(false)
     const [newMessage, setnewMessage] = useState(false);
+    const [isScrolled, setIsScrolled] = useState();
     var first = true
+
+    useEffect(() => {
+        // Function to handle scroll event
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            // Check if the user has scrolled down enough to fix the navbar
+            if (scrollTop > 1) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        }; // Add event listener when component mounts
+        window.addEventListener('scroll', handleScroll);
+
+        // Clean up the event listener when component unmounts
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []); // Empty dependency array means this effect runs only once after the component mounts
+
     setTimeout(() => {
         console.log('kholes')
         first=false
@@ -73,7 +94,7 @@ function Sidebar() {
     }
 
     return (
-        <nav className="navbar">
+        <nav className={isScrolled ? 'navbar scrolled' : 'navbar'} >
             <div className="profile-circle">
                 <img src={sessionStorage.getItem("pfp")} alt="Profile" />
             </div>
