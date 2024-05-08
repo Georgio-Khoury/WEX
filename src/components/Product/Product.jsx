@@ -76,7 +76,7 @@ function Product() {
 <Sidebar/>
     <div className='content'>
        
-    <div className="categories">
+    <div className="categories1">
    
                 {categories.map((category, index) => (
                     <button key={index} onClick={() => {setCateg(category);sessionStorage.setItem('categ',category)}}>
@@ -84,16 +84,16 @@ function Product() {
                     </button>
                 ))}
             </div>
-            <div className="items-container">
+            <div className="items-container1">
             {noitem&& <h1>No item available</h1>}
                 {items.map((item, index) => {
                   var itemobj = encodeURIComponent(JSON.stringify(item))
                   return(
-                    <div key={index} className="item" onClick={()=>navigate(`/productinfo/${itemobj}`)}>
+                    <div key={index} className="item1" onClick={()=>navigate(`/productinfo/${itemobj}`)}>
                         <img src={item.image} alt="Product" />
                         <h1>{item.Title}</h1>
                         <p>{item.price}</p>
-                        <div className='wishlist-button'>
+                        <div className='wishlist-button1'>
                         <CartButton id={item.id} status={sessionStorage.getItem(item.id)=='true'?true:false}/>
                         </div>
                     </div>

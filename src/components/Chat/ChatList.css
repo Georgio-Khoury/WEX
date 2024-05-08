@@ -1,0 +1,32 @@
+/* ChatList.css */
+.contentz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Adjust width as needed */
+  }
+  
+  .chat-entry {
+    width: 90%; /* Adjust width as needed */
+    border: 1px solid #ccc;
+    padding: 15px 20px;
+    margin: 8px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Centers text vertically */
+    background-color: #f8f8f8;
+  }
+  
+  .chat-entry:hover {
+    background-color: #e9e9e9;
+  }
+  
+  .chatbox {
+    text-align: center; /* Ensures text is centered within the box */
+    width: 100%;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+  }
+  

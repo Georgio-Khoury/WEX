@@ -37,7 +37,7 @@ function ChatList() {
     <div className='page-container'>
     <Sidebar/>
    
-        <div className='content'>
+        <div className='contentz'>
         {loading&&<Spinner/>}
         {chats.map(chat=>{
               

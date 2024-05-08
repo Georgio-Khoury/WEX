@@ -1,0 +1,116 @@
+/* General page styling */
+.page-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    background-image: url('https://www.transparenttextures.com/patterns/subtle-grey.png');
+    color: #333; /* For better readability on a light background */
+}
+
+/* Container for the form and its elements */
+.register-container {
+    background-color: white;
+    max-width: 500px; /* Slightly smaller width */
+    margin: 20px auto; /* Reduced vertical space */
+    padding: 20px 40px; /* Reduced padding */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+/* Form grid setup */
+.sform {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 15px; /* Reduced gap between form elements */
+}
+
+/* Styling for input fields and select box */
+input[type="text"],
+input[type="file"],
+select {
+    padding: 10px; /* Slightly reduced padding */
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Subtle border radius change */
+}
+
+/* Focus effects for input fields */
+input[type="text"]:focus,
+input[type="file"]:focus,
+select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3); /* More subtle focus glow */
+}
+
+/* Button styling */
+.sb {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Adjusted padding for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+}
+
+/* Hover effect for buttons */
+.sb:hover {
+    background-color: #357abd;
+}
+
+/* Custom styling for the file input area */
+.input-file-container {
+  position: relative;
+  width: 100%;
+  background-color: #4a90e2;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.input-file-trigger {
+  display: block;
+  padding: 10px 20px;
+  color: white;
+  background-color: #4a90e2;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
+
+.input-file {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-return {
+  position: absolute;
+  top: 0; right: 10px;
+  background-color: transparent;
+  padding: 10px 0;
+  color: white;
+  font-size: 12px;
+  text-align: right;
+  width: calc(100% - 140px); /* Adjust width based on button width to avoid overlap */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Ensuring consistency on hover */
+.input-file-trigger:hover {
+  background-color: #357abd;
+}
+
+/* Label and header styling */
+label {
+    display: block;
+    margin-bottom: 3px; /* Reduced margin for tighter layout */
+    color: #666;
+}
+
+.sh2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px; /* Reduced margin below heading */
+}
+

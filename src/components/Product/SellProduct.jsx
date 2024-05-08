@@ -77,8 +77,8 @@ function SellProduct() {
       <div className='content'>
       {loading && <Spinner />}
     <div className="register-container">
-    <h2>Sell Item</h2>
-    <form onSubmit={handleSubmit}>
+    <h2 className='sh2'>Sell Item</h2>
+    <form onSubmit={handleSubmit} className='sform'>
         <label htmlFor="image">Product Image</label>
         <input onChange={handleChange}  type="file" accept="image/*" placeholder='profile pic' id="image" name="image" />
 
@@ -102,7 +102,7 @@ function SellProduct() {
         <input onChange={handleChange} value={info.price} type="text" placeholder='price' id="price" name="price" />
         
         
-        <button type="submit">Post Item</button>
+        <button type="submit" className='sb'>Post Item</button>
         
     </form>
     {errormsg &&<p style={{color:'red'}}>{errormsg}</p>}

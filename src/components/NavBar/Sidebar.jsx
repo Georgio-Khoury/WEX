@@ -98,7 +98,7 @@ function Sidebar() {
                 <li className="navbar-item" onClick={()=>navigate('/myaccount')}>
                     <Link to="/myaccount">My Account</Link>
                 </li>
-                <li className="navbar-item" onClick={logoutpop}>
+                <li className="navbar-item" onClick={logoutpop} style={{ color: 'white' }}>
                     {logout?<Logout/>:'Logout'}
                 </li>
             </ul>

@@ -31,9 +31,9 @@ function Chatbox({ id, participants,sender,pfp }) {
 }
   return (
     <div className="chatbox" onClick={enterchat}>
-      <div className="chat-info">Chat ID: {id}</div>
-      <div className="participant-info">Participant: {receiver}</div>
-      <img src={pfp} className='account-profile-pic'/>
+      
+      <div className="participant-info">{receiver}</div>
+      <img src={pfp} className='account-pp'/>
     </div>
   );
 }

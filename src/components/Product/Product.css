@@ -71,3 +71,74 @@
 .categories button:hover {
     background-color: #e9e9e9; /* Darker background on hover */
 }
+
+
+
+
+
+
+
+.items-container1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Creates a responsive grid layout */
+    gap: 20px; /* Adds space between the grid items */
+    padding: 20px;
+}
+
+.item1 {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Stacks the content vertically */
+    align-items: center; /* Centers the content horizontally */
+    background: #393636; /* Adds a background color */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds subtle shadow for depth */
+    transition: transform 0.3s; /* Smooth transformation on hover */
+}
+
+.item1:hover {
+    transform: translateY(-5px); /* Slightly raise the item card on hover */
+}
+
+.item1 img {
+    width: 100%; /* Ensures the image takes full width of the container */
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border-radius: 5px; /* Optional: for rounded corners on the images */
+}
+
+
+.item1 h1 {
+    font-size: 1.2rem; /* Adjust font size */
+    margin: 5px 0; /* Adds vertical spacing */
+    color: #fff6f6; /* Dark grey color for text */
+}
+
+.item1 p {
+    font-size: 1rem; /* Adjust font size for the price */
+    color: #bc4338; /* Lighter text color for less emphasis */
+    margin-bottom: 0; /* Remove margin at the bottom */
+}
+
+.categories1 {
+    display: flex;
+    justify-content: center; /* Center align the category buttons */
+    flex-wrap: wrap; /* Wrap onto the next line if not enough space */
+    margin-bottom: 20px;
+}
+
+.categories1 button {
+    margin: 5px; /* Adds margin around buttons */
+    padding: 10px 20px;
+    border-radius: 20px; /* Rounded edges for buttons */
+    background-color: #393636;
+    border: 1px solid #858585; /* Light grey border */
+    font-weight: bold; /* Makes text bold */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    color:#ddd;
+}
+
+.categories1 button:hover {
+    background-color: #bbadad; /* Darker background on hover */
+}

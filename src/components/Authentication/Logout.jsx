@@ -18,7 +18,7 @@ const Logout = () => {
         return (
             <div className="logout-modal">
                 <div className="logout-modal-content">
-                    <h2>Do you really want to log out?</h2>
+                    <h2 style={{ color: 'black' }}>Do you really want to log out?</h2>
                     <div className="logout-modal-actions">
                         <button onClick={confirmLogout}>Yes</button>
                         <button onClick={() => setShowConfirm(false)}>No</button>

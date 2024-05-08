@@ -43,7 +43,7 @@ function ChatInit() {
           //const newClient = new W3CWebSocket(`ws://localhost:3002?chatID=${data.id}`);
           const newClient = new W3CWebSocket(`${WSO}?${data.id}`);
           setClient(newClient);
-          console.log("WebSocket client created");
+          console.log("WebSocket client created ", client);
         } else {
           console.error('Error fetching ID');
         }
