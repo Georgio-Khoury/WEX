@@ -7,12 +7,12 @@ const server = http.createServer(app)
 const wss = new ws.Server({ server });
 
 const {collection,getDocs,deleteDoc,doc,where,query, addDoc,Timestamp, serverTimestamp,setDoc,getDoc, FieldValue, updateDoc, orderBy }=require("firebase/firestore");
-const firebase = require('../firebase/firebaseinit')
-const firestore= require('../firebase/firebaseinit')
+const firebase = require('../firebaseinit')
+const firestore= require('../firebaseinit')
 firestore.firestore
 firebase.firebase
 
-wss.on('connection',(ws,req)=>{
+wss.on('connection',(ws,req)=>{ 
     console.log("connected to msgs")
     const chatId = req.url.split('=')[1];
     ws.chatId = chatId;
