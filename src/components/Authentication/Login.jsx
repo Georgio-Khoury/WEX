@@ -33,7 +33,7 @@ function Login() {
             
          })
           const data =  await response.json()
-          console.log(data)
+        
           sessionStorage.setItem('username',data.username)
           sessionStorage.setItem('name',data.name)
           sessionStorage.setItem("pfp", data.pfp)
@@ -42,7 +42,8 @@ function Login() {
           sessionStorage.setItem('categ','')
           sessionStorage.setItem('jwtToken',data.token)
           console.log("saved to session storage: ",sessionStorage.getItem('username'),sessionStorage.getItem('name'),sessionStorage.getItem('email'))
-          
+          const currentTimeInSeconds = Math.floor(Date.now() / 1000)
+          sessionStorage.setItem("logintime",currentTimeInSeconds)
          login(data.username)
          
         }
@@ -57,11 +58,13 @@ function Login() {
             seterrormsg('')
             await informbackend()
             setloading(false)
+            
             navigate('/product');
             console.log(userCredential)
         } catch (error) {
             seterrormsg("invalid credentials")
             setloading(false)
+            
             console.log('inv creds',error);
         }
        

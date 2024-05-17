@@ -26,3 +26,7 @@ firebaseConfig.js
 node_modules
 *.env
 apiconfig.js
+*.github
+*.firebase
+firebase.json
+*.firebaserc

@@ -33,6 +33,10 @@ const MyAccount = () => {
            
         )
         const data = await response.json()
+        if(response.ok){
+            sessionStorage.setItem("name",name)
+            sessionStorage.setItem('pn',pn)
+        }
         seteditmode(false)
     }
     return (

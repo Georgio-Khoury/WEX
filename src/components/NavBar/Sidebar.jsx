@@ -9,31 +9,25 @@ function Sidebar() {
     const [logout,setlogout] = useState(false)
     const [newMessage, setnewMessage] = useState(false);
     const [isScrolled, setIsScrolled] = useState();
-    var first = true
+    
 
     useEffect(() => {
-        // Function to handle scroll event
         const handleScroll = () => {
             const scrollTop = window.scrollY;
-            // Check if the user has scrolled down enough to fix the navbar
             if (scrollTop > 1) {
                 setIsScrolled(true);
             } else {
                 setIsScrolled(false);
             }
-        }; // Add event listener when component mounts
+        }; 
         window.addEventListener('scroll', handleScroll);
 
-        // Clean up the event listener when component unmounts
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []); // Empty dependency array means this effect runs only once after the component mounts
+    }, []); 
 
-    setTimeout(() => {
-        console.log('kholes')
-        first=false
-    },10000)
+    
     useEffect(() => {
         const unsubscribe = listenForNewMessages();
         
@@ -46,6 +40,7 @@ function Sidebar() {
     }, []); // Run only once on component mount
 
     const listenForNewMessages =  () => {
+        console.log('listener has been setup')
         const db = getFirestore();
         const chatsRef = collection(db, 'Chats');
         const user = sessionStorage.getItem('username')
@@ -56,8 +51,8 @@ function Sidebar() {
         return onSnapshot(q, (snapshot) => {
            
             snapshot.forEach((doc) => {
-               const snapsize = snapshot.docChanges().length
-             
+               
+                
                 const messagesRef = collection(doc.ref, 'Messages');
                 const messagesQuery = query(messagesRef);
             
@@ -67,11 +62,18 @@ function Sidebar() {
                  
                     
                     messagesSnapshot.docChanges().forEach((change) => {
-            
+                            console.log(change.doc.data())
+                        //console.log(change.doc.data().timestamp.seconds>sessionStorage.getItem('logintime'))
                         
-                        if (change.type === 'added'&&first==false) {
+                        if (change.type === 'added'&&change.doc.data().sender!=sessionStorage.getItem('username')&&change.doc.data().timestamp.seconds>sessionStorage.getItem('logintime')) {
                             console.log('new msg recieved')
-                    
+                            console.log(sessionStorage.getItem(doc.id))
+                           
+                            let c =parseInt(sessionStorage.getItem(doc.id))
+                            const exists = c !== null && !isNaN(parseInt(c, 10));
+                            exists?c++:c=1
+                            console.log("c: ",c)
+                            sessionStorage.setItem(doc.id,c)
                             setnewMessage(true);
 
                         }
