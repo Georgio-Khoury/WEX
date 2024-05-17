@@ -1,0 +1,3 @@
+Hosted at https://wex-frontend.onrender.com
+Since we are using the free package, the server shuts down when inactive, so the first request to it needs 30-50seconds to get a response because the server would be turning on again. The following requests would take between 0.5-2s.
+The chatting server (websocket) will also take 30 seconds to start(unless someone else already started it), so the first time you enter the chat you will not be able to send a message for 30-40 seconds, until a websocket connection is established when the server turns on, after which the chatting will be live with very little delay.
